@@ -32,11 +32,6 @@ struct MainView: View {
                 }
                 StatusOfDayAndDateView(status: "It's cloudy day", date: "Sunday, 4 Jun")
                 RoundedRectangleView(weather: viewModel.weather)
-                    .onAppear {
-                        withAnimation(.easeInOut(duration: 2)) {
-                            tempC = viewModel.weather.current.tempC
-                        }
-                    }
             }
         }
     }
