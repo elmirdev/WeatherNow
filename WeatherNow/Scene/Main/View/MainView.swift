@@ -33,6 +33,12 @@ struct MainView: View {
                 StatusOfDayAndDateView(status: "It's cloudy day", date: "Sunday, 4 Jun")
                 RoundedRectangleView(weather: viewModel.weather)
             }
+        }.task {
+            viewModel.getData {
+                withAnimation(.easeInOut(duration: 2)) {
+                    self.tempC = viewModel.weather?.current.tempC ?? 0
+                }
+            }
         }
     }
 }

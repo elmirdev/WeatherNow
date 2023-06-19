@@ -11,15 +11,12 @@ import SwiftUI
 class MainViewModel: ObservableObject {
 
     @Published var weather: WeatherModel?
-    
-    init() {
-        getData()
-    }
-    
-    func getData() {
+        
+    func getData(completion: @escaping()->()) {
         NetworkManager.shared.getWeather { weather in
             DispatchQueue.main.async {
                 self.weather = weather
+                completion()
             }
         }
     }
