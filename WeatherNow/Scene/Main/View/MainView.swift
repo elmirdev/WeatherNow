@@ -20,6 +20,7 @@ struct MainView: View {
                 Text("Beylagan, Azerbaijan")
                     .foregroundColor(.white)
                     .fontWeight(.semibold)
+                    .padding(.top)
                 ZStack(alignment: .topTrailing) {
                     Image("11")
                         .resizable()
