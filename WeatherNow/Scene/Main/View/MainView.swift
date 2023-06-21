@@ -20,6 +20,7 @@ struct MainView: View {
                 Text("Beylagan, Azerbaijan")
                     .foregroundColor(.white)
                     .fontWeight(.semibold)
+                    .padding(.top)
                 ZStack(alignment: .topTrailing) {
                     Image("11")
                         .resizable()
@@ -32,11 +33,12 @@ struct MainView: View {
                 }
                 StatusOfDayAndDateView(status: "It's cloudy day", date: "Sunday, 4 Jun")
                 RoundedRectangleView(weather: viewModel.weather)
-                    .onAppear {
-                        withAnimation(.easeInOut(duration: 2)) {
-                            tempC = viewModel.weather.current.tempC
-                        }
-                    }
+            }
+        }.task {
+            viewModel.getData {
+                withAnimation(.easeInOut(duration: 2)) {
+                    self.tempC = viewModel.weather?.current.tempC ?? 0
+                }
             }
         }
     }

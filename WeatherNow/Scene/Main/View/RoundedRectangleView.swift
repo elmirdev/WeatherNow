@@ -9,49 +9,51 @@ import SwiftUI
 
 struct RoundedRectangleView: View {
     
-    let weather: WeatherModel
+    let weather: WeatherModel?
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Weather information")
-                    .fontWeight(.bold)
-                Spacer()
-            }
-            .padding([.horizontal, .top])
-            HStack {
-                VStack(alignment: .leading, spacing: 22) {
-                    SmallIconWithTextCell(imageText: "temperature", title: "Feels Like", value: weather.current.feelslikeC)
-                    SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: weather.current.precipIn)
+        if let weather {
+            VStack {
+                HStack {
+                    Text("Weather information")
+                        .fontWeight(.bold)
+                    Spacer()
                 }
-                Spacer()
-                VStack(alignment: .leading, spacing: 22) {
-                    SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: weather.current.windKph)
-                    SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: CGFloat(weather.current.humidity))
+                .padding([.horizontal, .top])
+                HStack {
+                    VStack(alignment: .leading, spacing: 22) {
+                        SmallIconWithTextCell(imageText: "temperature", title: "Feels Like", value: weather.current.feelslikeC)
+                        SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: weather.current.precipIn)
+                    }
+                    Spacer()
+                    VStack(alignment: .leading, spacing: 22) {
+                        SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: weather.current.windKph)
+                        SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: CGFloat(weather.current.humidity))
+                    }
                 }
-            }
-            .padding(.horizontal, 28)
-            .padding(.vertical)
-            Divider()
-                .padding(.horizontal)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 32) {
-                    HourlyDegreeCell()
-                    HourlyDegreeCell()
-                    HourlyDegreeCell()
-                    HourlyDegreeCell()
-                    HourlyDegreeCell()
-                    HourlyDegreeCell()
-                }
-                .padding(.vertical)
                 .padding(.horizontal, 28)
+                .padding(.vertical)
+                Divider()
+                    .padding(.horizontal)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 32) {
+                        HourlyDegreeCell()
+                        HourlyDegreeCell()
+                        HourlyDegreeCell()
+                        HourlyDegreeCell()
+                        HourlyDegreeCell()
+                        HourlyDegreeCell()
+                    }
+                    .padding(.vertical)
+                    .padding(.horizontal, 28)
+                }
             }
+            .background {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(.white)
+            }.padding()
         }
-        .background {
-            RoundedRectangle(cornerRadius: 16)
-                .fill(.white)
-        }.padding()
     }
 }
 
