@@ -52,6 +52,44 @@ struct RoundedRectangleView: View {
                 RoundedRectangle(cornerRadius: 16)
                     .fill(.white)
             }.padding()
+        } else {
+            VStack {
+                HStack {
+                    Text("Weather information")
+                        .fontWeight(.bold)
+                    Spacer()
+                }
+                .padding([.horizontal, .top])
+                HStack {
+                    VStack(alignment: .leading, spacing: 22) {
+                        SmallIconWithTextCell(imageText: "temperature", title: "Feels Like", value: 0)
+                        SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: 0)
+                    }
+                    Spacer()
+                    VStack(alignment: .leading, spacing: 22) {
+                        SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: 0)
+                        SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: 0)
+                    }
+                }
+                .padding(.horizontal, 28)
+                .padding(.vertical)
+                Divider()
+                    .padding(.horizontal)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 32) {
+                        ForEach(0..<11) { index in
+                            HourlyDegreeCell(hour: Hour(timeEpoch: 0, time: "", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "", code: 0), windMph: 0, windKph: 0, windDegree: 0, windDir: "", pressureMB: 0, pressureIn: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0, windchillC: 0, windchillF: 0, heatindexC: 0, heatindexF: 0, dewpointC: 0, dewpointF: 0, willItRain: 0, chanceOfRain: 0, willItSnow: 0, chanceOfSnow: 0, visKM: 0, visMiles: 0, gustMph: 0, gustKph: 0, uv: 0))
+                        }
+                    }
+                    .padding(.vertical)
+                    .padding(.horizontal, 28)
+                }
+            }
+            .background {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(.white)
+            }.padding()
         }
     }
 }
