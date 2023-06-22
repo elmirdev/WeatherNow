@@ -19,6 +19,6 @@ struct TextAnimatableValue: View, Animatable {
     }
     
     var body: some View {
-        Text("\(Int(value))°")
+        Text("\(String(format: "%.0f", value))°")
     }
 }
