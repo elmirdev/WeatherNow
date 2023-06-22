@@ -31,7 +31,7 @@ struct MainView: View {
                         .fontWeight(.heavy)
                         .font(.system(size: 100))
                 }
-                StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "", date: viewModel.weather?.location.localtime ?? "")
+                StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "-", date: viewModel.weather?.location.localtime ?? "-")
                 RoundedRectangleView(weather: viewModel.weather)
             }
         }.task {
