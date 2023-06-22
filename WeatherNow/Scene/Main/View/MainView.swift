@@ -17,7 +17,7 @@ struct MainView: View {
             Color.blue
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                Text("Beylagan, Azerbaijan")
+                Text((viewModel.weather?.location.name ?? "") + " " + (viewModel.weather?.location.country ?? "-"))
                     .foregroundColor(.white)
                     .fontWeight(.semibold)
                     .padding(.top)
@@ -31,7 +31,7 @@ struct MainView: View {
                         .fontWeight(.heavy)
                         .font(.system(size: 100))
                 }
-                StatusOfDayAndDateView(status: "It's cloudy day", date: "Sunday, 4 Jun")
+                StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "", date: viewModel.weather?.location.localtime ?? "")
                 RoundedRectangleView(weather: viewModel.weather)
             }
         }.task {
