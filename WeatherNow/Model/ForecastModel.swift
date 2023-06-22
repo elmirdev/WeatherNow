@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Forecast
-struct Forecast: Codable {
+struct ForecastModel: Codable {
     let forecastday: [Forecastday]
 }
 
