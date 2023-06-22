@@ -19,6 +19,7 @@
 		EFA49C9D2A2E0E65006CCA16 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA49C9C2A2E0E65006CCA16 /* WeatherModel.swift */; };
 		EFA49C9F2A2E0E73006CCA16 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA49C9E2A2E0E73006CCA16 /* NetworkManager.swift */; };
 		EFA49CA42A2E1CD1006CCA16 /* TextAnimatableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA49CA32A2E1CD1006CCA16 /* TextAnimatableValue.swift */; };
+		EFC132752A4462520075E772 /* ForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC132742A4462520075E772 /* ForecastModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		EFA49C9E2A2E0E73006CCA16 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		EFA49CA22A2E144D006CCA16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFA49CA32A2E1CD1006CCA16 /* TextAnimatableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAnimatableValue.swift; sourceTree = "<group>"; };
+		EFC132742A4462520075E772 /* ForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				EFA49C9C2A2E0E65006CCA16 /* WeatherModel.swift */,
+				EFC132742A4462520075E772 /* ForecastModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				EF11CD822A2F5F5100C04E33 /* MainViewModel.swift in Sources */,
 				EF4ACEB02A2E99AF00D7BB14 /* SmallIconWithTextCell.swift in Sources */,
 				EFA49CA42A2E1CD1006CCA16 /* TextAnimatableValue.swift in Sources */,
+				EFC132752A4462520075E772 /* ForecastModel.swift in Sources */,
 				EFA49C9D2A2E0E65006CCA16 /* WeatherModel.swift in Sources */,
 				EFA435022A2AADA2006420A9 /* WeatherNowApp.swift in Sources */,
 			);

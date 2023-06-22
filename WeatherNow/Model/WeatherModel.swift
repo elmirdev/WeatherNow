@@ -11,6 +11,7 @@ import Foundation
 struct WeatherModel: Codable {
     let location: Location
     let current: Current
+    let forecast: ForecastModel
 }
 
 // MARK: - Current
