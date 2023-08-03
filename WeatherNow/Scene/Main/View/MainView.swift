@@ -18,12 +18,12 @@ struct MainView: View {
             Color.blue
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                Text((viewModel.weather?.location.name ?? "") + " " + (viewModel.weather?.location.country ?? "-"))
+                Text("Baku")
                     .foregroundColor(.white)
                     .fontWeight(.semibold)
                     .padding(.top)
                 ZStack(alignment: .topTrailing) {
-                    Image("11")
+                    Image(viewModel.imageName)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 270, height: 270)
