@@ -10,8 +10,10 @@ import SwiftUI
 struct StatusOfDayAndDateView: View {
     let status: String
     let date: String
+    @Binding var isZoomed: Bool
+    
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(alignment: isZoomed ? .leading : .center, spacing: 8) {
             Text(status)
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
@@ -48,6 +50,6 @@ struct StatusOfDayAndDateView: View {
 
 struct StatusOfDayAndDateView_Previews: PreviewProvider {
     static var previews: some View {
-        StatusOfDayAndDateView(status: "It's raining", date: "June")
+        StatusOfDayAndDateView(status: "It's raining", date: "June", isZoomed: .constant(false))
     }
 }
