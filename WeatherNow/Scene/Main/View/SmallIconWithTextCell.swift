@@ -12,37 +12,60 @@ struct SmallIconWithTextCell: View {
     let title: String
     let value: CGFloat
     @State private var animatableValue: CGFloat = 0
+    @Binding var isZoomed: Bool
+    @Namespace private var animation
     
     var body: some View {
-        HStack(spacing: 12) {
-            Image(imageText)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 20, height: 20)
-                .background {
-                    Circle()
-                        .fill(.quaternary.opacity(0.5))
-                        .frame(width:32, height: 32)
+            HStack(spacing: 12) {
+                VStack(alignment: .leading, spacing: 16) {
+                    Image(imageText)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .background {
+                            Circle()
+                                .fill(.quaternary.opacity(0.5))
+                                .frame(width:32, height: 32)
+                    }
+                    if isZoomed {
+                        VStack(alignment: .leading) {
+                            Text(title)
+                                .font(.caption)
+                                .fontWeight(.medium)
+                                .foregroundColor(.gray)
+                                .matchedGeometryEffect(id: "TitleText", in: animation)
+                            TextAnimatableValue(value: animatableValue)
+                                .font(.caption)
+                                .fontWeight(.bold)
+                                .matchedGeometryEffect(id: "ValueText", in: animation)
+                        }
+                    }
                 }
-            VStack(alignment: .leading) {
-                Text(title)
-                    .font(.caption)
-                    .fontWeight(.medium)
-                    .foregroundColor(.gray)
-                TextAnimatableValue(value: animatableValue)
-                    .font(.caption)
-                    .fontWeight(.bold)
+                if !isZoomed {
+                    VStack(alignment: .leading) {
+                        Text(title)
+                            .font(.caption)
+                            .fontWeight(.medium)
+                            .foregroundColor(.gray)
+                            .matchedGeometryEffect(id: "TitleText", in: animation)
+                        TextAnimatableValue(value: animatableValue)
+                            .font(.caption)
+                            .fontWeight(.bold)
+                            .matchedGeometryEffect(id: "ValueText", in: animation)
+                    }
+                }
             }
-        }.onAppear {
-            withAnimation(.easeInOut(duration: 2)) {
-                self.animatableValue = value
-            }
+            .padding(isZoomed ? 16 : 0)
+            .onAppear {
+                withAnimation(.easeInOut(duration: 2)) {
+                    self.animatableValue = value
+                }
         }
     }
 }
 
 struct SmallIconWithText_Previews: PreviewProvider {
     static var previews: some View {
-        SmallIconWithTextCell(imageText: "temperature", title: "Test", value: 16)
+        SmallIconWithTextCell(imageText: "temperature", title: "Test", value: 16, isZoomed: .constant(false))
     }
 }
