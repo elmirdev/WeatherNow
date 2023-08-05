@@ -167,7 +167,7 @@
                         "condition": {
                             "text": "Partly cloudy",
                             "icon": "//cdn.weatherapi.com/weather/64x64/night/116.png",
-                            "code": 1003
+                            "code": 1006
                         },
                         "wind_mph": 14.8,
                         "wind_kph": 23.8,
@@ -245,7 +245,7 @@
                         "condition": {
                             "text": "Partly cloudy",
                             "icon": "//cdn.weatherapi.com/weather/64x64/night/116.png",
-                            "code": 1003
+                            "code": 1063
                         },
                         "wind_mph": 15.2,
                         "wind_kph": 24.5,
@@ -284,7 +284,7 @@
                         "condition": {
                             "text": "Partly cloudy",
                             "icon": "//cdn.weatherapi.com/weather/64x64/night/116.png",
-                            "code": 1003
+                            "code": 101276
                         },
                         "wind_mph": 14.5,
                         "wind_kph": 23.4,
@@ -323,7 +323,7 @@
                         "condition": {
                             "text": "Partly cloudy",
                             "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
-                            "code": 1003
+                            "code": 101279
                         },
                         "wind_mph": 14.1,
                         "wind_kph": 22.7,
@@ -362,7 +362,7 @@
                         "condition": {
                             "text": "Partly cloudy",
                             "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
-                            "code": 1003
+                            "code": 1114
                         },
                         "wind_mph": 14.5,
                         "wind_kph": 23.4,
@@ -479,7 +479,7 @@
                         "condition": {
                             "text": "Sunny",
                             "icon": "//cdn.weatherapi.com/weather/64x64/day/113.png",
-                            "code": 1000
+                            "code": 1135
                         },
                         "wind_mph": 17.4,
                         "wind_kph": 28.1,
@@ -518,7 +518,7 @@
                         "condition": {
                             "text": "Sunny",
                             "icon": "//cdn.weatherapi.com/weather/64x64/day/113.png",
-                            "code": 1000
+                            "code": 101072
                         },
                         "wind_mph": 18.3,
                         "wind_kph": 29.5,

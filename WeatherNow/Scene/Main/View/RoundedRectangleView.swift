@@ -50,7 +50,7 @@ struct RoundedRectangleView: View {
                 }
             }
             .background {
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: 24)
                     .fill(.white)
             }.padding()
         } else {
