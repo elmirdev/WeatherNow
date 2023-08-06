@@ -34,6 +34,11 @@ struct HourlyDegreeCell: View {
                 self.animatableValue = hour.tempC
             }
         }
+        .onChange(of: hour.tempC) { newValue in
+            withAnimation(.easeInOut(duration: 1)) {
+                self.animatableValue = newValue
+            }
+        }
     }
     
     func getHour(dateString: String) -> String {
