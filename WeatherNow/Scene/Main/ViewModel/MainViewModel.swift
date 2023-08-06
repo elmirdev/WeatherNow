@@ -8,6 +8,11 @@
 import Foundation
 import SwiftUI
 
+enum PeriodOfDay {
+    case day
+    case night
+}
+
 class MainViewModel: ObservableObject {
 
     @Published var weather: WeatherModel?
@@ -32,43 +37,42 @@ class MainViewModel: ObservableObject {
         }
     }
     
-    var imageName: String {
-        guard let weather else { return "1003n" }
-        switch weather.current.condition.code {
+    func getImageName(code: Int, periodOfDay: PeriodOfDay) -> String {
+        switch code {
         case 1000:
-            return "1000d"
+            return periodOfDay == .day ? "1000d" : "1000n"
         case 1003:
-            return "1003d"
+            return periodOfDay == .day ? "1003d" : "1003n"
         case 1006, 1009, 1030:
-            return "1006d"
+            return periodOfDay == .day ? "1006d" : "1006n"
         case 1063, 1180, 1186, 1192, 1240, 1243, 1246:
-            return "1063d"
+            return periodOfDay == .day ? "1063d" : "1063n"
         case 1066, 1069, 1210, 1216, 1222, 1255, 1258, 1261, 1264:
-            return "1066d"
+            return periodOfDay == .day ? "1066d" : "1066n"
         case 1072, 1213, 1219, 1225, 1237:
-            return "1072d"
+            return periodOfDay == .day ? "1072d" : "1072n"
         case 1087, 1273:
-            return "1087d"
+            return periodOfDay == .day ? "1087d" : "1087n"
         case 1114, 1117:
-            return "1114d"
+            return periodOfDay == .day ? "1114d" : "1114n"
         case 1135:
-            return "1135d"
+            return periodOfDay == .day ? "1135d" : "1135n"
         case 1147:
-            return "1147d"
+            return periodOfDay == .day ? "1147d" : "1147n"
         case 1150, 1153, 1183, 1189, 1195:
-            return "1150d"
+            return periodOfDay == .day ? "1150d" : "1150n"
         case 1168, 1171, 1198, 1201, 1204, 1207:
-            return "1168d"
+            return periodOfDay == .day ? "1168d" : "1168n"
         case 1249, 1252:
-            return "1249d"
+            return periodOfDay == .day ? "1249d" : "1249n"
         case 1276:
-            return "1276d"
+            return periodOfDay == .day ? "1276d" : "1276n"
         case 1279:
-            return "1279d"
+            return periodOfDay == .day ? "1279d" : "1279n"
         case 1282:
-            return "1282d"
+            return periodOfDay == .day ? "1282d" : "1282n"
         default:
-            return "1000n"
+            return periodOfDay == .day ? "1000d" : "1000n"
         }
     }
 }
