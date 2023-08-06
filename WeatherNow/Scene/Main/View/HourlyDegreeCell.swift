@@ -20,18 +20,23 @@ struct HourlyDegreeCell: View {
             Image(imageName)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 20, height: 20)
+                .frame(width: 24, height: 24)
+                .padding(8)
                 .background {
                     Circle()
-                        .fill(.quaternary.opacity(0.5))
-                        .frame(width:32, height: 32)
+                        .fill(.quaternary.opacity(0.3))
                 }
             TextAnimatableValue(value: animatableValue)
                 .font(.callout)
-                .fontWeight(.bold)
+                .fontWeight(.semibold)
         }.onAppear {
             withAnimation(.easeInOut(duration: 2)) {
                 self.animatableValue = hour.tempC
+            }
+        }
+        .onChange(of: hour.tempC) { newValue in
+            withAnimation(.easeInOut(duration: 1)) {
+                self.animatableValue = newValue
             }
         }
     }
