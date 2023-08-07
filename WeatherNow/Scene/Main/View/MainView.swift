@@ -8,20 +8,21 @@
 import SwiftUI
 
 struct MainView: View {
-    
+    @State private var bgColor = Color.black
     @State private var tempC: CGFloat = 0
-    @ObservedObject private var viewModel = MainViewModel()
     @State private var imageOffset = CGSize(width: 0, height: UIScreen.main.bounds.height)
     @State private var isZoomed = false
+
+    @ObservedObject private var viewModel = MainViewModel()
+    
     @Namespace private var animation
     
     var body: some View {
         ZStack {
-            Color.blue
+            bgColor
                 .ignoresSafeArea()
             VStack(spacing: 0) {
-                Text("Baku Azerbaijan")
-//                Text((viewModel.weather?.location.name ?? "") + " " + (viewModel.weather?.location.country ?? "-"))
+                Text((viewModel.weather?.location.name ?? ""))
                         .foregroundColor(.white)
                         .fontWeight(.semibold)
                         .padding(.bottom)
@@ -30,8 +31,7 @@ struct MainView: View {
                 }
                 HStack {
                     ZStack(alignment: .topTrailing) {
-    //                        Image(viewModel.imageName)
-                            Image("1003d")
+                            Image(viewModel.imageName)
                                 .resizable()
                                 .scaledToFit()
                                 .padding()
@@ -53,7 +53,7 @@ struct MainView: View {
                                 )
 
                         if !isZoomed {
-                            TextAnimatableValue(value: tempC)
+                            TextAnimatableValue(value: tempC, unit: "°")
                                 .fixedSize()
                                 .foregroundColor(.white)
                                 .fontWeight(.heavy)
@@ -63,7 +63,7 @@ struct MainView: View {
                         }
                     }
                     if isZoomed {
-                        TextAnimatableValue(value: tempC)
+                        TextAnimatableValue(value: tempC, unit: "°")
                             .fixedSize()
                             .foregroundColor(.white)
                             .fontWeight(.heavy)
@@ -96,6 +96,7 @@ struct MainView: View {
             }.task {
                 viewModel.getData {
                     withAnimation(.easeInOut(duration: 2)) {
+                        bgColor = viewModel.bgColor
                         self.tempC = viewModel.weather?.current.tempC ?? 0
                         imageOffset = .zero
                     }
