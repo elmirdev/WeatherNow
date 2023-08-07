@@ -23,12 +23,12 @@ struct HourlyDegreeCell: View {
                 Image(mainViewModel.getImageName(code: hour.condition.code, periodOfDay: periodOfHour))
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 28, height: 28)
-//                    .padding(8)
-//                    .background {
-//                        Circle()
-//                            .fill(.quaternary.opacity(0.2))
-//                    }
+                    .frame(width: 26, height: 26)
+                    .padding(6)
+                    .background {
+                        Circle()
+                            .fill(.quaternary.opacity(0.2))
+                    }
             }
             TextAnimatableValue(value: animatableValue)
                 .font(.callout)
