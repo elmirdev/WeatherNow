@@ -30,7 +30,7 @@ struct HourlyDegreeCell: View {
                             .fill(.quaternary.opacity(0.2))
                     }
             }
-            TextAnimatableValue(value: animatableValue)
+            TextAnimatableValue(value: animatableValue, unit: "°")
                 .font(.callout)
                 .fontWeight(.semibold)
         }.onAppear {

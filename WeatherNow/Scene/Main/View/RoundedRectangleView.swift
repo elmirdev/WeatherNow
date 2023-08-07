@@ -27,21 +27,21 @@ struct RoundedRectangleView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 22) {
                         if let weather {
-                            SmallIconWithTextCell(imageText: "temperature", title: "Feels Like", value: weather.current.feelslikeC, isZoomed: $isZoomed)
-                            SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: weather.current.precipIn, isZoomed: $isZoomed)
+                            SmallIconWithTextCell(imageText: "temperature", title: "Feels Like", value: weather.current.feelslikeC, unit: "°", isZoomed: $isZoomed)
+                            SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: weather.current.precipIn, unit: "%", isZoomed: $isZoomed)
                         } else {
-                            SmallIconWithTextCell(imageText: "temperature", title: "Feels Like", value: 0, isZoomed: $isZoomed)
-                            SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: 0, isZoomed: $isZoomed)
+                            SmallIconWithTextCell(imageText: "temperature", title: "Feels Like", value: 0, unit: "°", isZoomed: $isZoomed)
+                            SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: 0, unit: "%", isZoomed: $isZoomed)
                         }
                     }
                     Spacer()
                     VStack(alignment: .leading, spacing: 22) {
                         if let weather {
-                            SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: weather.current.windKph, isZoomed: $isZoomed)
-                            SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: CGFloat(weather.current.humidity), isZoomed: $isZoomed)
+                            SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: weather.current.windKph, unit: " km/h", isZoomed: $isZoomed)
+                            SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: CGFloat(weather.current.humidity), unit: "%", isZoomed: $isZoomed)
                         } else {
-                            SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: 0, isZoomed: $isZoomed)
-                            SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: 0, isZoomed: $isZoomed)
+                            SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: 0, unit: " km/h", isZoomed: $isZoomed)
+                            SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: 0, unit: "%", isZoomed: $isZoomed)
                         }
                     }
                 }
