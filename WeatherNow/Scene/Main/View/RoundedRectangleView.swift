@@ -55,8 +55,8 @@ struct RoundedRectangleView: View {
                         Text(index == 0 ? "Today" : "\(days[index]) Aug")
                             .bold()
                             .foregroundColor(.white)
-                            .padding(.vertical, 3)
-                            .padding(.horizontal, 6)
+                            .padding(.vertical, 6)
+                            .padding(.horizontal, 8)
                             .background {
                                 Capsule()
                                     .fill(colors[index])
