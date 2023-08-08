@@ -12,7 +12,6 @@ struct RoundedRectangleView: View {
     let weather: WeatherModel?
     @Binding var isExpanded: Bool
     
-    @State var days = ["Today"]
     @State var colors: [Color] = [.blue, .gray.opacity(0.5), .gray.opacity(0.5)]
     @State private var selectedDay = 0
     
@@ -50,29 +49,34 @@ struct RoundedRectangleView: View {
                 Divider()
                     .padding(.horizontal)
                 
-                HStack {
-                    ForEach(days.indices, id: \.self) { index in
-                        Text(index == 0 ? "Today" : "\(days[index]) Aug")
-                            .bold()
-                            .foregroundColor(.white)
-                            .padding(.vertical, 6)
-                            .padding(.horizontal, 8)
-                            .background {
-                                Capsule()
-                                    .fill(colors[index])
-                            }.onTapGesture {
-                                withAnimation(.spring()) {
-                                    for colorIndex in 0..<colors.count {
-                                        colors[colorIndex] = .gray.opacity(0.5)
+                if let days = weather?.forecast.forecastday {
+                    HStack {
+                        ForEach(days.indices, id: \.self) { index in
+                            let day = getDayAndMonth(dateString: days[index].date).0
+                            let monthName = getDayAndMonth(dateString:days[index].date).1
+                            
+                            Text(index == 0 ? "Today" : "\(day) \(monthName)")
+                                .bold()
+                                .foregroundColor(.white)
+                                .padding(.vertical, 6)
+                                .padding(.horizontal, 8)
+                                .background {
+                                    Capsule()
+                                        .fill(colors[index])
+                                }.onTapGesture {
+                                    withAnimation(.spring()) {
+                                        for colorIndex in 0..<colors.count {
+                                            colors[colorIndex] = .gray.opacity(0.5)
+                                        }
+                                        colors[index] = .blue
+                                        selectedDay = index
                                     }
-                                    colors[index] = .blue
-                                    selectedDay = index
                                 }
-                            }
+                        }
                     }
-                }
-                .frame(height: isExpanded ? .none : 0)
+                    .frame(height: isExpanded ? .none : 0)
                 .opacity(isExpanded ? 1 : 0)
+                }
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     if let hours = weather?.forecast.forecastday[selectedDay].hour {
@@ -83,16 +87,6 @@ struct RoundedRectangleView: View {
                         }
                         .padding(.vertical)
                         .padding(.horizontal, 28)
-                        .onAppear {
-                            if let weather {
-                                var forecastDays = [String]()
-                                weather.forecast.forecastday.forEach { forecastDay in
-                                    let day = getDay(dateString: forecastDay.date)
-                                    forecastDays.append(day)
-                                }
-                                self.days = forecastDays
-                            }
-                        }
                     } else {
                         HourlyDegreeCell(hour: Hour(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "day", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0))
                             .padding(.vertical)
@@ -104,16 +98,23 @@ struct RoundedRectangleView: View {
                     .fill(.white)
             }.padding()
     }
-    func getDay(dateString: String) -> String {
+    func getDayAndMonth(dateString: String) -> (String,String) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
 
         if let date = dateFormatter.date(from: dateString) {
             let calendar = Calendar.current
+            
+            // MARK: Day
             let day = calendar.component(.day, from: date)
-            return "\(day)"
+            
+            // MARK: Month
+            let monthFormatter = DateFormatter()
+            monthFormatter.dateFormat = "MMM"
+            let monthName = monthFormatter.string(from: date)
+            return ("\(day)","\(monthName)")
         } else {
-            return "-"
+            return ("-","-")
         }
     }
 }
