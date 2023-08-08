@@ -70,6 +70,6 @@ struct HourlyDegreeCell: View {
 
 struct HourlyDegreeCell_Previews: PreviewProvider {
     static var previews: some View {
-        HourlyDegreeCell(hour: Hour(timeEpoch: 1687464000, time: "2023-06-23 00:00", tempC: 23.4, tempF: 23.4, isDay: 0, condition: Condition(text: "Partly cloudy", icon: "day", code: 1003), windMph: 14.8, windKph: 14.8, windDegree: 15, windDir: "NNE", pressureMB: 4.4, pressureIn: 4.4, precipMm: 4.4, precipIn: 4.4, humidity: 12, cloud: 9, feelslikeC: 3.8, feelslikeF: 3.9, windchillC: 3.98, windchillF: 1.9, heatindexC: 1.9, heatindexF: 2.9, dewpointC: 2.9, dewpointF: 2.9, willItRain: 8, chanceOfRain: 8, willItSnow: 8, chanceOfSnow: 8, visKM: 8.8, visMiles: 8.8, gustMph: 8.8, gustKph: 88.8, uv: 8.8))
+        HourlyDegreeCell(hour: Hour(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "1000d", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0))
     }
 }
