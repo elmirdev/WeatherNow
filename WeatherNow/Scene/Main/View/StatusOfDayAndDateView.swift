@@ -43,7 +43,7 @@ struct StatusOfDayAndDateView: View {
             let monthName = monthFormatter.string(from: date)
             return "\(weekDay) \(day) \(monthName)"
         } else {
-            return "-"
+            return "Loading.."
         }
     }
 }
