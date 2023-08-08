@@ -74,8 +74,12 @@ struct RoundedRectangleView: View {
                             }
                     }
                 }
-                .frame(height: isExpanded ? .none : 0)
+                .frame(height: isExpanded ? .none : .zero)
                 .opacity(isExpanded ? 1 : 0)
+            } else {
+                Text("To not show junk")
+                    .frame(height: .zero)
+                    .opacity(0)
             }
             
             ScrollView(.horizontal, showsIndicators: false) {
