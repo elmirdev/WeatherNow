@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-// MARK: Change default period
 enum PeriodOfDay {
     case day
     case night
@@ -45,7 +44,6 @@ class MainViewModel: NSObject, ObservableObject {
         }
     }
     
-    // MARK: Change default period
     var periodOfHour: PeriodOfDay {
         guard let weather else { return .day }
         if weather.current.condition.icon.contains("day") {
@@ -62,14 +60,12 @@ class MainViewModel: NSObject, ObservableObject {
         return Color(colorName)
     }
     
-    // MARK: Change default icon
     var imageName: String {
-        guard let weather else { return "1000d" }
+        guard let weather else { return "1006d" }
         let imageName = getImageName(code: weather.current.condition.code, periodOfDay: periodOfHour)
         return imageName
     }
     
-    // MARK: Change default icon
     func getImageName(code: Int, periodOfDay: PeriodOfDay) -> String {
         switch code {
         case 1000:
@@ -105,7 +101,7 @@ class MainViewModel: NSObject, ObservableObject {
         case 1282:
             return periodOfDay == .day ? "1282d" : "1282n"
         default:
-            return periodOfDay == .day ? "1000d" : "1000n"
+            return periodOfDay == .day ? "1006d" : "1006n"
         }
     }
     
