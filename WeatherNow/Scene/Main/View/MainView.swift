@@ -22,7 +22,7 @@ struct MainView: View {
             bgColor
                 .ignoresSafeArea()
             VStack(spacing: 0) {
-                Text((viewModel.weather?.location.name ?? ""))
+                Text((viewModel.weather?.location.name ?? "Loading.."))
                         .foregroundColor(.white)
                         .fontWeight(.semibold)
                         .padding(.bottom)
@@ -70,7 +70,7 @@ struct MainView: View {
                             .font(.system(size: 44))
                             .matchedGeometryEffect(id: "DegreText", in: animation)
                         
-                        StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "-", date: viewModel.weather?.location.localtime ?? "-", isZoomed: $isZoomed)
+                        StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "Loading..", date: viewModel.weather?.location.localtime ?? "Loading..", isZoomed: $isZoomed)
                             .fixedSize()
                             .padding()
                             .matchedGeometryEffect(id: "StatusText", in: animation)
@@ -79,7 +79,7 @@ struct MainView: View {
                 }
                 if !isZoomed {
                     Spacer()
-                    StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "-", date: viewModel.weather?.location.localtime ?? "-", isZoomed: $isZoomed)
+                    StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "Loading..", date: viewModel.weather?.location.localtime ?? "Loading..", isZoomed: $isZoomed)
                         .fixedSize()
                         .matchedGeometryEffect(id: "StatusText", in: animation)
                 }
@@ -93,15 +93,14 @@ struct MainView: View {
                 if isZoomed {
                     Spacer()
                 }
-            }.task {
-                viewModel.getData {
-                    withAnimation(.easeInOut(duration: 2)) {
-                        bgColor = viewModel.bgColor
-                        self.tempC = viewModel.weather?.current.tempC ?? 0
-                        imageOffset = .zero
-                    }
+            }
+            .onChange(of: viewModel.weather?.current.tempC) { newValue in
+                withAnimation(.easeInOut(duration: 2)) {
+                    bgColor = viewModel.bgColor
+                    self.tempC = viewModel.weather?.current.tempC ?? 0
+                    imageOffset = .zero
                 }
-        }
+            }
         }
     }
 }
