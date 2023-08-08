@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
 // MARK: Change default period
 enum PeriodOfDay {
@@ -14,29 +15,36 @@ enum PeriodOfDay {
     case night
 }
 
-class MainViewModel: ObservableObject {
+class MainViewModel: NSObject, ObservableObject {
 
     @Published var weather: WeatherModel?
+    private let locationManager = CLLocationManager()
         
-    func getData(completion: @escaping()->()) {
-//        NetworkManager.shared.getWeather { weather in
-//            DispatchQueue.main.async {
-//                self.weather = weather
-//                completion()
-//            }
-//        }
-//        guard let jsonData = jsonString.data(using: .utf8) else { return }
+        override init() {
+            super.init()
+            fetchUserLocation()
+        }
+    
+    private func getData(lat: CGFloat, long: CGFloat) {
+        NetworkManager.shared.getWeather(lat: lat, long: long) { weather in
+            DispatchQueue.main.async {
+                self.weather = weather
+            }
+        }
+    }
+    
+    private func getDataFromLocal() {
         if let path = Bundle.main.path(forResource: "getWeatherResponse", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let weather = try JSONDecoder().decode(WeatherModel.self, from: data)
                 self.weather = weather
-                completion()
             } catch {
                 print("DEBUG: Error \(error)")
             }
         }
     }
+    
     // MARK: Change default period
     var periodOfHour: PeriodOfDay {
         guard let weather else { return .day }
@@ -99,5 +107,26 @@ class MainViewModel: ObservableObject {
         default:
             return periodOfDay == .day ? "1000d" : "1000n"
         }
+    }
+    
+    private func fetchUserLocation() {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyReduced
+        locationManager.startUpdatingLocation()
+    }
+}
+
+extension MainViewModel: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let userLocation = locations.last else { return }
+        let latitude = userLocation.coordinate.latitude
+        let longitude = userLocation.coordinate.longitude
+        getData(lat: latitude, long: longitude)
+        locationManager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location manager error: \(error.localizedDescription)")
     }
 }
