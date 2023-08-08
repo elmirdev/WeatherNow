@@ -12,7 +12,7 @@ struct MainView: View {
     @State private var tempC: CGFloat = 0
     @State private var imageOffset = CGSize(width: 0, height: UIScreen.main.bounds.height)
     @State private var isExpanded = false
-
+    
     @ObservedObject private var viewModel = MainViewModel()
     
     @Namespace private var animation
@@ -23,21 +23,22 @@ struct MainView: View {
                 .ignoresSafeArea()
             VStack(spacing: 0) {
                 Text((viewModel.weather?.location.name ?? "Loading.."))
-                        .foregroundColor(.white)
-                        .fontWeight(.semibold)
-                        .padding(.bottom)
+                    .font(.system(size: 20))
+                    .foregroundColor(.white)
+                    .fontWeight(.semibold)
+                    .padding(.bottom)
                 if !isExpanded {
                     Spacer()
                 }
                 HStack {
                     ZStack(alignment: .topTrailing) {
-                            Image(viewModel.imageName)
-                                .resizable()
-                                .scaledToFit()
-                                .padding()
-                                .frame(maxWidth: isExpanded ? 120 : 320, maxHeight: isExpanded ? 120 : 320)
-                                .offset(x: imageOffset.width, y: imageOffset.height)
-                                .gesture(
+                        Image(viewModel.imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .padding()
+                            .frame(maxWidth: isExpanded ? 120 : 320, maxHeight: isExpanded ? 120 : 320)
+                            .offset(x: imageOffset.width, y: imageOffset.height)
+                            .gesture(
                                 DragGesture()
                                     .onChanged({ gesture in
                                         withAnimation(.easeInOut(duration: 1)) {
@@ -50,8 +51,8 @@ struct MainView: View {
                                             self.imageOffset = .zero
                                         }
                                     })
-                                )
-
+                            )
+                        
                         if !isExpanded {
                             TextAnimatableValue(value: tempC, unit: "°")
                                 .fixedSize()
