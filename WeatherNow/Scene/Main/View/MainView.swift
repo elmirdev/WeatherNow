@@ -11,7 +11,7 @@ struct MainView: View {
     @State private var bgColor = Color.black
     @State private var tempC: CGFloat = 0
     @State private var imageOffset = CGSize(width: 0, height: UIScreen.main.bounds.height)
-    @State private var isZoomed = false
+    @State private var isExpanded = false
 
     @ObservedObject private var viewModel = MainViewModel()
     
@@ -26,7 +26,7 @@ struct MainView: View {
                         .foregroundColor(.white)
                         .fontWeight(.semibold)
                         .padding(.bottom)
-                if !isZoomed {
+                if !isExpanded {
                     Spacer()
                 }
                 HStack {
@@ -35,7 +35,7 @@ struct MainView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .padding()
-                                .frame(maxWidth: isZoomed ? 120 : 320, maxHeight: isZoomed ? 120 : 320)
+                                .frame(maxWidth: isExpanded ? 120 : 320, maxHeight: isExpanded ? 120 : 320)
                                 .offset(x: imageOffset.width, y: imageOffset.height)
                                 .gesture(
                                 DragGesture()
@@ -52,7 +52,7 @@ struct MainView: View {
                                     })
                                 )
 
-                        if !isZoomed {
+                        if !isExpanded {
                             TextAnimatableValue(value: tempC, unit: "°")
                                 .fixedSize()
                                 .foregroundColor(.white)
@@ -62,7 +62,7 @@ struct MainView: View {
                                 .matchedGeometryEffect(id: "DegreText", in: animation)
                         }
                     }
-                    if isZoomed {
+                    if isExpanded {
                         TextAnimatableValue(value: tempC, unit: "°")
                             .fixedSize()
                             .foregroundColor(.white)
@@ -70,27 +70,27 @@ struct MainView: View {
                             .font(.system(size: 44))
                             .matchedGeometryEffect(id: "DegreText", in: animation)
                         
-                        StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "Loading..", date: viewModel.weather?.location.localtime ?? "Loading..", isZoomed: $isZoomed)
+                        StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "Loading..", date: viewModel.weather?.location.localtime ?? "Loading..", isExpanded: $isExpanded)
                             .fixedSize()
                             .padding()
                             .matchedGeometryEffect(id: "StatusText", in: animation)
                         Spacer()
                     }
                 }
-                if !isZoomed {
+                if !isExpanded {
                     Spacer()
-                    StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "Loading..", date: viewModel.weather?.location.localtime ?? "Loading..", isZoomed: $isZoomed)
+                    StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "Loading..", date: viewModel.weather?.location.localtime ?? "Loading..", isExpanded: $isExpanded)
                         .fixedSize()
                         .matchedGeometryEffect(id: "StatusText", in: animation)
                 }
-                RoundedRectangleView(weather: viewModel.weather, isZoomed: $isZoomed)
+                RoundedRectangleView(weather: viewModel.weather, isExpanded: $isExpanded)
                     .frame(maxWidth: 640)
                     .onTapGesture {
                         withAnimation(.spring()) {
-                            isZoomed.toggle()
+                            isExpanded.toggle()
                         }
                     }
-                if isZoomed {
+                if isExpanded {
                     Spacer()
                 }
             }

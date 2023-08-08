@@ -13,7 +13,7 @@ struct SmallIconWithTextCell: View {
     let value: CGFloat
     let unit: String
     @State private var animatableValue: CGFloat = 0
-    @Binding var isZoomed: Bool
+    @Binding var isExpanded: Bool
     @Namespace private var animation
     
     var body: some View {
@@ -28,7 +28,7 @@ struct SmallIconWithTextCell: View {
                                 .fill(.quaternary.opacity(0.5))
                                 .frame(width:32, height: 32)
                     }
-                    if isZoomed {
+                    if isExpanded {
                         VStack(alignment: .leading) {
                             Text(title)
                                 .font(.caption)
@@ -42,7 +42,7 @@ struct SmallIconWithTextCell: View {
                         }
                     }
                 }
-                if !isZoomed {
+                if !isExpanded {
                     VStack(alignment: .leading) {
                         Text(title)
                             .font(.caption)
@@ -56,7 +56,7 @@ struct SmallIconWithTextCell: View {
                     }
                 }
             }
-            .padding(isZoomed ? 16 : 0)
+            .padding(isExpanded ? 16 : 0)
             .onAppear {
                 withAnimation(.easeInOut(duration: 2)) {
                     self.animatableValue = value
@@ -67,6 +67,6 @@ struct SmallIconWithTextCell: View {
 
 struct SmallIconWithText_Previews: PreviewProvider {
     static var previews: some View {
-        SmallIconWithTextCell(imageText: "temperature", title: "Test", value: 16, unit: "°", isZoomed: .constant(false))
+        SmallIconWithTextCell(imageText: "temperature", title: "Test", value: 16, unit: "°", isExpanded: .constant(false))
     }
 }
