@@ -38,16 +38,21 @@ struct MainView: View {
                             .padding()
                             .frame(maxWidth: isExpanded ? 120 : 320, maxHeight: isExpanded ? 120 : 320)
                             .offset(x: imageOffset.width, y: imageOffset.height)
+                            .onTapGesture {
+                                withAnimation(.spring()) {
+                                    isExpanded.toggle()
+                                }
+                            }
                             .gesture(
                                 DragGesture()
                                     .onChanged({ gesture in
-                                        withAnimation(.easeInOut(duration: 1)) {
+                                        withAnimation(.easeInOut(duration: 0.5)) {
                                             self.imageOffset.height = gesture.translation.height
                                             self.imageOffset.width = gesture.translation.width
                                         }
                                     })
                                     .onEnded({ _ in
-                                        withAnimation(.easeOut(duration: 1)) {
+                                        withAnimation(.easeOut(duration: 0.75)) {
                                             self.imageOffset = .zero
                                         }
                                     })
@@ -98,7 +103,7 @@ struct MainView: View {
                 }
             }
             .onChange(of: viewModel.weather?.current.tempC) { newValue in
-                withAnimation(.easeInOut(duration: 2)) {
+                withAnimation(.easeInOut(duration: 1.5)) {
                     bgColor = viewModel.bgColor
                     self.tempC = viewModel.weather?.current.tempC ?? 0
                     imageOffset = .zero
