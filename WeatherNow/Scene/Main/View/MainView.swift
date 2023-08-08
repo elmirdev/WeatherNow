@@ -73,6 +73,7 @@ struct MainView: View {
                         
                         StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "Loading..", date: viewModel.weather?.location.localtime ?? "Loading..", isExpanded: $isExpanded)
                             .fixedSize()
+                            .opacity(viewModel.weather == nil ? 0 : 1)
                             .padding()
                             .matchedGeometryEffect(id: "StatusText", in: animation)
                         Spacer()
@@ -82,6 +83,7 @@ struct MainView: View {
                     Spacer()
                     StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "Loading..", date: viewModel.weather?.location.localtime ?? "Loading..", isExpanded: $isExpanded)
                         .fixedSize()
+                        .opacity(viewModel.weather == nil ? 0 : 1)
                         .matchedGeometryEffect(id: "StatusText", in: animation)
                 }
                 RoundedRectangleView(weather: viewModel.weather, isExpanded: $isExpanded)
