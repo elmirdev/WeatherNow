@@ -11,6 +11,7 @@ struct SmallIconWithTextCell: View {
     let imageText: String
     let title: String
     let value: CGFloat
+    let unit: String
     @State private var animatableValue: CGFloat = 0
     @Binding var isZoomed: Bool
     @Namespace private var animation
@@ -34,7 +35,7 @@ struct SmallIconWithTextCell: View {
                                 .fontWeight(.medium)
                                 .foregroundColor(.gray)
                                 .matchedGeometryEffect(id: "TitleText", in: animation)
-                            TextAnimatableValue(value: animatableValue)
+                            TextAnimatableValue(value: animatableValue, unit: unit)
                                 .font(.caption)
                                 .fontWeight(.bold)
                                 .matchedGeometryEffect(id: "ValueText", in: animation)
@@ -48,7 +49,7 @@ struct SmallIconWithTextCell: View {
                             .fontWeight(.medium)
                             .foregroundColor(.gray)
                             .matchedGeometryEffect(id: "TitleText", in: animation)
-                        TextAnimatableValue(value: animatableValue)
+                        TextAnimatableValue(value: animatableValue, unit: unit)
                             .font(.caption)
                             .fontWeight(.bold)
                             .matchedGeometryEffect(id: "ValueText", in: animation)
@@ -66,6 +67,6 @@ struct SmallIconWithTextCell: View {
 
 struct SmallIconWithText_Previews: PreviewProvider {
     static var previews: some View {
-        SmallIconWithTextCell(imageText: "temperature", title: "Test", value: 16, isZoomed: .constant(false))
+        SmallIconWithTextCell(imageText: "temperature", title: "Test", value: 16, unit: "°", isZoomed: .constant(false))
     }
 }
