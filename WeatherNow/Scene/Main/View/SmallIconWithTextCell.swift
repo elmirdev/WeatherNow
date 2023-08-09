@@ -20,8 +20,7 @@ struct SmallIconWithTextCell: View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 18)
                 .fill(.quaternary.opacity(0.25))
-                .frame(maxHeight: 96)
-                .opacity(isExpanded ? 1 : 0)
+                .frame(maxHeight: isExpanded ? 96 : 48)
             HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 16) {
                     Image(imageText)
@@ -65,7 +64,7 @@ struct SmallIconWithTextCell: View {
                     }
                 }
             }
-            .padding(12)
+            .padding(.horizontal, 12)
             .onAppear {
                 withAnimation(.easeInOut(duration: 2)) {
                     self.animatableValue = value
