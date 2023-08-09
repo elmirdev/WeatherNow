@@ -27,7 +27,7 @@ struct MainView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 24, height: 24)
-                    Text((viewModel.weather?.location.name ?? "Loading.."))
+                    Text(viewModel.cityName)
                         .font(.system(size: 20))
                         .foregroundColor(.white)
                         .fontWeight(.semibold)
@@ -83,7 +83,7 @@ struct MainView: View {
                             .font(.system(size: 44))
                             .matchedGeometryEffect(id: "DegreText", in: animation)
                         
-                        StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "Loading..", date: viewModel.weather?.location.localtime ?? "Loading..", isExpanded: $isExpanded)
+                        StatusOfDayAndDateView(status: viewModel.conditionText, date: viewModel.localtimeText, isExpanded: $isExpanded)
                             .fixedSize()
                             .opacity(viewModel.weather == nil ? 0 : 1)
                             .padding()
@@ -93,7 +93,7 @@ struct MainView: View {
                 }
                 if !isExpanded {
                     Spacer()
-                    StatusOfDayAndDateView(status: viewModel.weather?.current.condition.text ?? "Loading..", date: viewModel.weather?.location.localtime ?? "Loading..", isExpanded: $isExpanded)
+                    StatusOfDayAndDateView(status: viewModel.conditionText, date: viewModel.localtimeText, isExpanded: $isExpanded)
                         .fixedSize()
                         .opacity(viewModel.weather == nil ? 0 : 1)
                         .matchedGeometryEffect(id: "StatusText", in: animation)
