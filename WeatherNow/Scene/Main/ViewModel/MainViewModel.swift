@@ -61,7 +61,7 @@ class MainViewModel: NSObject, ObservableObject {
     }
     
     var cityName: String {
-        return weather?.location.name ?? "Loading.."
+        return weather?.location.name ?? "Loading..."
     }
     
     var imageName: String {
@@ -71,11 +71,11 @@ class MainViewModel: NSObject, ObservableObject {
     }
     
     var conditionText: String {
-        return weather?.current.condition.text ?? "Loading.."
+        return weather?.current.condition.text ?? "Loading..."
     }
     
     var localtimeText: String {
-        return weather?.location.localtime ?? "Loading.."
+        return weather?.location.localtime ?? "Loading..."
     }
     
     func getImageName(code: Int, periodOfDay: PeriodOfDay) -> String {
