@@ -17,21 +17,17 @@ struct HourlyDegreeCell: View {
     var body: some View {
         VStack(spacing: 16) {
             Text(getHour(dateString: hour.time))
-                .font(.callout)
+                .font(.system(size: 14))
                 .foregroundColor(.gray)
             if let periodOfHour {
                 Image(mainViewModel.getImageName(code: hour.condition.code, periodOfDay: periodOfHour))
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 26, height: 26)
-                    .padding(6)
-                    .background {
-                        Circle()
-                            .fill(.quaternary.opacity(0.2))
-                    }
+                    .frame(width: 28, height: 28)
+                    .padding(2)
             }
             TextAnimatableValue(value: animatableValue, unit: "°")
-                .font(.callout)
+                .font(.system(size: 16))
                 .fontWeight(.semibold)
         }.onAppear {
             withAnimation(.easeInOut(duration: 2)) {
@@ -70,6 +66,6 @@ struct HourlyDegreeCell: View {
 
 struct HourlyDegreeCell_Previews: PreviewProvider {
     static var previews: some View {
-        HourlyDegreeCell(hour: Hour(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "1000d", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0))
+        HourlyDegreeCell(hour: Hour(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "day", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0))
     }
 }
