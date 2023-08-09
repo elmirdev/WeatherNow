@@ -44,13 +44,13 @@ struct RoundedRectangleView: View {
                     if let weather {
                         SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: weather.current.windKph, unit: " km/h", isExpanded: $isExpanded)
                         SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: CGFloat(weather.current.humidity), unit: "%", isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "humidity", title: "Pressure", value: weather.current.pressureMB, unit: " hPa", isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "pressure", title: "Pressure", value: weather.current.pressureMB, unit: " hPa", isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     } else {
                         SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: 0, unit: " km/h", isExpanded: $isExpanded)
                         SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: 0, unit: "%", isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "humidity", title: "Pressure", value: 0, unit: " hPa", isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "pressure", title: "Pressure", value: 0, unit: " hPa", isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     }
