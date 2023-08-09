@@ -22,11 +22,18 @@ struct MainView: View {
             bgColor
                 .ignoresSafeArea()
             VStack(spacing: 0) {
-                Text((viewModel.weather?.location.name ?? "Loading.."))
-                    .font(.system(size: 20))
-                    .foregroundColor(.white)
-                    .fontWeight(.semibold)
-                    .padding(.bottom)
+                HStack {
+                    Image("location")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, height: 24)
+                    Text((viewModel.weather?.location.name ?? "Loading.."))
+                        .font(.system(size: 20))
+                        .foregroundColor(.white)
+                        .fontWeight(.semibold)
+                }
+                .padding(.bottom)
+                
                 if !isExpanded {
                     Spacer()
                 }
