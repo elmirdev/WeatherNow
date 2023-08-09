@@ -28,7 +28,7 @@ struct RoundedRectangleView: View {
                     if let weather {
                         SmallIconWithTextCell(imageText: "temperature", title: "Feels Like", value: weather.current.feelslikeC, unit: "°", isExpanded: $isExpanded)
                         SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: weather.current.precipIn, unit: "%", isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "1000d", title: "UV Index", value: weather.current.precipIn, unit: "", isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "1000d", title: "UV Index", value: weather.current.uv, unit: "", isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     } else {
@@ -44,13 +44,13 @@ struct RoundedRectangleView: View {
                     if let weather {
                         SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: weather.current.windKph, unit: " km/h", isExpanded: $isExpanded)
                         SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: CGFloat(weather.current.humidity), unit: "%", isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "humidity", title: "Visibility", value: weather.current.precipIn, unit: "", isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "humidity", title: "Pressure", value: weather.current.pressureMB, unit: " hPa", isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     } else {
                         SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: 0, unit: " km/h", isExpanded: $isExpanded)
                         SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: 0, unit: "%", isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "humidity", title: "Visibility", value: 0, unit: "", isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "humidity", title: "Pressure", value: 0, unit: " hPa", isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     }
