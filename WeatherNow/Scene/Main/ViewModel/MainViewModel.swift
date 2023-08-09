@@ -120,7 +120,7 @@ class MainViewModel: NSObject, ObservableObject {
     private func fetchUserLocation() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyReduced
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
     }
 }
