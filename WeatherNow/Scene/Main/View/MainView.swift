@@ -22,7 +22,7 @@ struct MainView: View {
             bgColor
                 .ignoresSafeArea()
             VStack(spacing: 0) {
-                HStack {
+                HStack(alignment: .center, spacing: 2) {
                     Image("location")
                         .resizable()
                         .scaledToFit()
