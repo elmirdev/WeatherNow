@@ -34,16 +34,14 @@ struct MainView: View {
                 }
                 .padding(.bottom)
                 
-                if !isExpanded {
                     Spacer()
-                }
                 HStack {
                     ZStack(alignment: .topTrailing) {
                         Image(viewModel.imageName)
                             .resizable()
                             .scaledToFit()
-                            .padding()
-                            .frame(maxWidth: isExpanded ? 120 : 320, maxHeight: isExpanded ? 120 : 320)
+                            .padding(isExpanded ? 0 : 8)
+                            .frame(minWidth: 60, maxWidth: isExpanded ? 180 : 320, minHeight: 60,maxHeight: isExpanded ? 180 : 320)
                             .offset(x: imageOffset.width, y: imageOffset.height)
                             .onTapGesture {
                                 withAnimation(.spring()) {
@@ -86,13 +84,12 @@ struct MainView: View {
                         StatusOfDayAndDateView(status: viewModel.conditionText, date: viewModel.localtimeText, isExpanded: $isExpanded)
                             .fixedSize()
                             .opacity(viewModel.weather == nil ? 0 : 1)
-                            .padding()
+                            .padding(.horizontal)
                             .matchedGeometryEffect(id: "StatusText", in: animation)
-                        Spacer()
                     }
                 }
+                Spacer()
                 if !isExpanded {
-                    Spacer()
                     StatusOfDayAndDateView(status: viewModel.conditionText, date: viewModel.localtimeText, isExpanded: $isExpanded)
                         .fixedSize()
                         .opacity(viewModel.weather == nil ? 0 : 1)
@@ -105,9 +102,6 @@ struct MainView: View {
                             isExpanded.toggle()
                         }
                     }
-                if isExpanded {
-                    Spacer()
-                }
             }
             .onChange(of: viewModel.weather?.current.tempC) { newValue in
                 withAnimation(.easeInOut(duration: 1.5)) {
