@@ -33,7 +33,7 @@ struct RoundedRectangleView: View {
                         SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: 0, unit: "%", isExpanded: $isExpanded)
                     }
                 }
-                Spacer()
+                Spacer(minLength: 12)
                 VStack(alignment: .leading, spacing: 22) {
                     if let weather {
                         SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: weather.current.windKph, unit: " km/h", isExpanded: $isExpanded)
@@ -44,8 +44,8 @@ struct RoundedRectangleView: View {
                     }
                 }
             }
-            .padding(.horizontal, 28)
-            .padding(.vertical)
+            .padding(.horizontal)
+            .padding(.vertical, 8)
             Divider()
                 .padding(.horizontal)
             
@@ -125,6 +125,6 @@ struct RoundedRectangleView: View {
 
 struct RoundedRectangleView_Previews: PreviewProvider {
     static var previews: some View {
-        RoundedRectangleView(weather: WeatherModel(location: Location(name: "-", region: "-", country: "-", lat: 0, lon: 0, tzID: "", localtimeEpoch: 0, localtime: ""), current: Current(lastUpdatedEpoch: 0, lastUpdated: "", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "", code: 0), windMph: 0, windKph: 0, windDegree: 0, windDir: "", pressureMB: 0, pressureIn: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0, visKM: 0, visMiles: 0, uv: 0, gustMph: 0, gustKph: 0), forecast: ForecastModel(forecastday: [Forecastday(date: "", dateEpoch: 1, day: Day(maxtempC: 1, maxtempF: 2, mintempC: 2, mintempF: 2, avgtempC: 1, avgtempF: 1, maxwindMph: 1, maxwindKph: 1, totalprecipMm: 1, totalprecipIn: 1, totalsnowCM: 1, avgvisKM: 1, avgvisMiles: 1, avghumidity: 1, dailyWillItRain: 1, dailyChanceOfRain: 1, dailyWillItSnow: 1, dailyChanceOfSnow: 1, condition: Condition(text: "", icon: "", code: 1), uv: 1), astro: Astro(sunrise: "", sunset: "", moonrise: "", moonset: "", moonPhase: "", moonIllumination: "", isMoonUp: 1, isSunUp: 1), hour: [Hour(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "1000d", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0)])])), isExpanded: .constant(true))
+        RoundedRectangleView(weather: WeatherModel(location: Location(name: "-", region: "-", country: "-", lat: 0, lon: 0, tzID: "", localtimeEpoch: 0, localtime: ""), current: Current(lastUpdatedEpoch: 0, lastUpdated: "", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "", code: 0), windMph: 0, windKph: 0, windDegree: 0, windDir: "", pressureMB: 0, pressureIn: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0, visKM: 0, visMiles: 0, uv: 0, gustMph: 0, gustKph: 0), forecast: ForecastModel(forecastday: [Forecastday(date: "", dateEpoch: 1, day: Day(maxtempC: 1, maxtempF: 2, mintempC: 2, mintempF: 2, avgtempC: 1, avgtempF: 1, maxwindMph: 1, maxwindKph: 1, totalprecipMm: 1, totalprecipIn: 1, totalsnowCM: 1, avgvisKM: 1, avgvisMiles: 1, avghumidity: 1, dailyWillItRain: 1, dailyChanceOfRain: 1, dailyWillItSnow: 1, dailyChanceOfSnow: 1, condition: Condition(text: "", icon: "", code: 1), uv: 1), astro: Astro(sunrise: "", sunset: "", moonrise: "", moonset: "", moonPhase: "", moonIllumination: "", isMoonUp: 1, isSunUp: 1), hour: [Hour(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "1000d", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0)])])), isExpanded: .constant(false))
     }
 }
