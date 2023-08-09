@@ -20,13 +20,13 @@ struct SmallIconWithTextCell: View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 18)
                 .fill(.quaternary.opacity(0.25))
-                .frame(maxHeight: isExpanded ? 96 : 48)
+                .frame(height: isExpanded ? 96 : 48)
             HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 16) {
                     Image(imageText)
                         .resizable()
                         .scaledToFit()
-                        .frame(minWidth: 20, maxWidth: 24, minHeight: 20, maxHeight: 24)
+                        .frame(maxWidth: 24, maxHeight: 24)
                         .background {
                             Circle()
                                 .fill(.quaternary.opacity(0.35))
