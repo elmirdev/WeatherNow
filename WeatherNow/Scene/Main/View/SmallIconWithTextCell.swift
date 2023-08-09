@@ -17,27 +17,33 @@ struct SmallIconWithTextCell: View {
     @Namespace private var animation
     
     var body: some View {
+        ZStack(alignment: .leading) {
+            RoundedRectangle(cornerRadius: 18)
+                .fill(.quaternary.opacity(0.2))
+                .frame(maxHeight: 96)
             HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 16) {
                     Image(imageText)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 20, height: 20)
+                        .frame(width: 24, height: 24)
                         .background {
                             Circle()
                                 .fill(.quaternary.opacity(0.5))
                                 .frame(width:32, height: 32)
-                    }
+                        }
                     if isExpanded {
                         VStack(alignment: .leading) {
                             Text(title)
-                                .font(.caption)
+                                .font(.system(size: 14))
                                 .fontWeight(.medium)
                                 .foregroundColor(.gray)
+                                .fixedSize()
                                 .matchedGeometryEffect(id: "TitleText", in: animation)
                             TextAnimatableValue(value: animatableValue, unit: unit)
-                                .font(.caption)
+                                .font(.system(size: 14))
                                 .fontWeight(.bold)
+                                .fixedSize()
                                 .matchedGeometryEffect(id: "ValueText", in: animation)
                         }
                     }
@@ -45,28 +51,31 @@ struct SmallIconWithTextCell: View {
                 if !isExpanded {
                     VStack(alignment: .leading) {
                         Text(title)
-                            .font(.caption)
+                            .font(.system(size: 14))
                             .fontWeight(.medium)
                             .foregroundColor(.gray)
+                            .fixedSize()
                             .matchedGeometryEffect(id: "TitleText", in: animation)
                         TextAnimatableValue(value: animatableValue, unit: unit)
-                            .font(.caption)
+                            .font(.system(size: 14))
                             .fontWeight(.bold)
+                            .fixedSize()
                             .matchedGeometryEffect(id: "ValueText", in: animation)
                     }
                 }
             }
-            .padding(isExpanded ? 16 : 0)
+            .padding(16)
             .onAppear {
                 withAnimation(.easeInOut(duration: 2)) {
                     self.animatableValue = value
                 }
+            }
         }
     }
 }
 
 struct SmallIconWithText_Previews: PreviewProvider {
     static var previews: some View {
-        SmallIconWithTextCell(imageText: "temperature", title: "Test", value: 16, unit: "°", isExpanded: .constant(false))
+        SmallIconWithTextCell(imageText: "temperature", title: "Precipitation", value: 16, unit: "°", isExpanded: .constant(true))
     }
 }
