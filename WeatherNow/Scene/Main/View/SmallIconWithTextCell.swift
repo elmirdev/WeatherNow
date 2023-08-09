@@ -27,7 +27,7 @@ struct SmallIconWithTextCell: View {
                     Image(imageText)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 24, height: 24)
+                        .frame(minWidth: 20, maxWidth: 24, minHeight: 20, maxHeight: 24)
                         .background {
                             Circle()
                                 .fill(.quaternary.opacity(0.35))
@@ -65,7 +65,7 @@ struct SmallIconWithTextCell: View {
                     }
                 }
             }
-            .padding(16)
+            .padding(12)
             .onAppear {
                 withAnimation(.easeInOut(duration: 2)) {
                     self.animatableValue = value
