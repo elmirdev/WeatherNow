@@ -111,9 +111,11 @@ struct MainView: View {
             }
             .onChange(of: viewModel.weather?.current.tempC) { newValue in
                 withAnimation(.easeInOut(duration: 1.5)) {
-                    bgColor = viewModel.bgColor
                     self.tempC = viewModel.weather?.current.tempC ?? 0
                     imageOffset = .zero
+                }
+                withAnimation(.easeInOut(duration: 2)) {
+                    bgColor = viewModel.bgColor
                 }
             }
         }
