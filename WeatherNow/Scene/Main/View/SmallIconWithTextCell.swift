@@ -21,6 +21,7 @@ struct SmallIconWithTextCell: View {
             RoundedRectangle(cornerRadius: 18)
                 .fill(.quaternary.opacity(0.2))
                 .frame(maxHeight: 96)
+                .opacity(isExpanded ? 1 : 0)
             HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 16) {
                     Image(imageText)
