@@ -30,7 +30,7 @@ struct SmallIconWithTextCell: View {
                         .frame(width: 24, height: 24)
                         .background {
                             Circle()
-                                .fill(.quaternary.opacity(0.5))
+                                .fill(.quaternary.opacity(0.35))
                                 .frame(width:32, height: 32)
                         }
                     if isExpanded {
