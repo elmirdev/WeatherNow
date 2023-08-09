@@ -19,7 +19,7 @@ struct SmallIconWithTextCell: View {
     var body: some View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 18)
-                .fill(.quaternary.opacity(0.2))
+                .fill(.quaternary.opacity(0.25))
                 .frame(maxHeight: 96)
                 .opacity(isExpanded ? 1 : 0)
             HStack(spacing: 12) {
