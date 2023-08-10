@@ -15,7 +15,7 @@ struct HourlyDegreeCell: View {
     @State private var animatableValue: CGFloat = 0
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 8) {
             Text(getHour(dateString: hour.time))
                 .font(.system(size: 14))
                 .foregroundColor(.gray)
