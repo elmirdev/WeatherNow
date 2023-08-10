@@ -41,8 +41,7 @@ struct SmallIconWithTextCell: View {
                                 .fixedSize()
                                 .matchedGeometryEffect(id: "TitleText", in: animation)
                             TextAnimatableValue(value: animatableValue, unit: unit)
-                                .font(.system(size: 14))
-                                .fontWeight(.bold)
+                                .font(.system(size: 14, weight: .bold))
                                 .fixedSize()
                                 .matchedGeometryEffect(id: "ValueText", in: animation)
                         }
@@ -57,8 +56,7 @@ struct SmallIconWithTextCell: View {
                             .fixedSize()
                             .matchedGeometryEffect(id: "TitleText", in: animation)
                         TextAnimatableValue(value: animatableValue, unit: unit)
-                            .font(.system(size: 14))
-                            .fontWeight(.bold)
+                            .font(.system(size: 14, weight: .bold))
                             .fixedSize()
                             .matchedGeometryEffect(id: "ValueText", in: animation)
                     }

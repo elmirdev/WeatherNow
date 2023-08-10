@@ -67,8 +67,7 @@ struct MainView: View {
                             TextAnimatableValue(value: tempC, unit: "°")
                                 .fixedSize()
                                 .foregroundColor(.white)
-                                .fontWeight(.heavy)
-                                .font(.system(size: 88))
+                                .font(.system(size: 88, weight: .heavy))
                                 .offset(x: 30, y: -30)
                                 .matchedGeometryEffect(id: "DegreText", in: animation)
                         }
@@ -77,8 +76,7 @@ struct MainView: View {
                         TextAnimatableValue(value: tempC, unit: "°")
                             .fixedSize()
                             .foregroundColor(.white)
-                            .fontWeight(.heavy)
-                            .font(.system(size: 44))
+                            .font(.system(size: 44, weight: .heavy))
                             .matchedGeometryEffect(id: "DegreText", in: animation)
                         
                         StatusOfDayAndDateView(status: viewModel.conditionText, date: viewModel.localtimeText, isExpanded: $isExpanded)

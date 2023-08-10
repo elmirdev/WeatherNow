@@ -27,8 +27,7 @@ struct HourlyDegreeCell: View {
                     .padding(2)
             }
             TextAnimatableValue(value: animatableValue, unit: "°")
-                .font(.system(size: 16))
-                .fontWeight(.semibold)
+                .font(.system(size: 16, weight: .semibold))
         }.onAppear {
             withAnimation(.easeInOut(duration: 2)) {
                 self.animatableValue = hour.tempC
