@@ -368,6 +368,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherNow/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Weather Meather";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app needs access to your location to show weather information";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs to access your location to show weather information";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -404,6 +405,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherNow/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Weather Meather";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app needs access to your location to show weather information";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs to access your location to show weather information";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
