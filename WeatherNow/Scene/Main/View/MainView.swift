@@ -95,12 +95,10 @@ struct MainView: View {
                         .opacity(viewModel.weather == nil ? 0 : 1)
                         .matchedGeometryEffect(id: "StatusText", in: animation)
                 }
-                RoundedRectangleView(weather: viewModel.weather, isExpanded: $isExpanded)
+                RoundedRectangleView(weather: viewModel.weather, isExpanded: $isExpanded, handleButton: toggleIsExpanded)
                     .frame(maxWidth: 640)
                     .onTapGesture {
-                        withAnimation(.spring()) {
-                            isExpanded.toggle()
-                        }
+                        toggleIsExpanded()
                     }
             }
             .onChange(of: viewModel.weather?.current.tempC) { newValue in
@@ -112,6 +110,12 @@ struct MainView: View {
                     bgColor = viewModel.bgColor
                 }
             }
+        }
+    }
+    
+    func toggleIsExpanded() {
+        withAnimation(.spring()) {
+            isExpanded.toggle()
         }
     }
 }
