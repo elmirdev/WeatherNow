@@ -45,25 +45,37 @@ class MainViewModel: NSObject, ObservableObject {
     }
     
     var periodOfHour: PeriodOfDay {
-        guard let weather else { return .day }
-        if weather.current.condition.icon.contains("day") {
+        guard let icon = weather?.current.condition.icon else { return .day }
+        if icon.contains("day") {
             return .day
-        } else if weather.current.condition.icon.contains("night") {
+        } else if icon.contains("night") {
             return .night
         }
         return .day
     }
     
     var bgColor: Color {
-        guard let weather else { return .black }
-        let colorName = getImageName(code: weather.current.condition.code, periodOfDay: periodOfHour)
+        guard let code = weather?.current.condition.code else { return .black }
+        let colorName = getImageName(code: code, periodOfDay: periodOfHour)
         return Color(colorName)
     }
     
+    var cityName: String {
+        return weather?.location.region ?? "Loading..."
+    }
+    
     var imageName: String {
-        guard let weather else { return "1006d" }
-        let imageName = getImageName(code: weather.current.condition.code, periodOfDay: periodOfHour)
+        guard let code = weather?.current.condition.code else { return "1006d" }
+        let imageName = getImageName(code: code, periodOfDay: periodOfHour)
         return imageName
+    }
+    
+    var conditionText: String {
+        return weather?.current.condition.text ?? "Loading..."
+    }
+    
+    var localtimeText: String {
+        return weather?.location.localtime ?? "Loading..."
     }
     
     func getImageName(code: Int, periodOfDay: PeriodOfDay) -> String {
@@ -108,7 +120,7 @@ class MainViewModel: NSObject, ObservableObject {
     private func fetchUserLocation() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyReduced
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
     }
 }
