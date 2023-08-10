@@ -41,7 +41,7 @@ struct MainView: View {
                             .resizable()
                             .scaledToFit()
                             .padding(isExpanded ? 0 : 16)
-                            .frame(minWidth: 60, maxWidth: isExpanded ? 180 : 320, minHeight: 60,maxHeight: isExpanded ? 180 : 320)
+                            .frame(minWidth: 50, maxWidth: isExpanded ? 180 : 320, minHeight: 50,maxHeight: isExpanded ? 180 : 320)
                             .offset(x: imageOffset.width, y: imageOffset.height)
                             .onTapGesture {
                                 withAnimation(.spring()) {
