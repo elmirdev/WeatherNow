@@ -61,7 +61,7 @@ class MainViewModel: NSObject, ObservableObject {
     }
     
     var cityName: String {
-        return weather?.location.name ?? "Loading..."
+        return weather?.location.region ?? "Loading..."
     }
     
     var imageName: String {
