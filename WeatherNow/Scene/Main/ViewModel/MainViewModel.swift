@@ -61,7 +61,16 @@ class MainViewModel: NSObject, ObservableObject {
     }
     
     var cityName: String {
-        return weather?.location.region ?? "Loading..."
+        guard let location = weather?.location else { return "Loading..." }
+        if location.country == "Azerbaijan" {
+            if location.region == "Baki" {
+                return "Baku"
+            } else {
+                return location.region
+            }
+        } else {
+            return location.name
+        }
     }
     
     var imageName: String {

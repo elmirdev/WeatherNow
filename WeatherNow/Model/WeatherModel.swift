@@ -16,34 +16,25 @@ struct WeatherModel: Codable {
 
 // MARK: - Current
 struct Current: Codable {
-    let lastUpdatedEpoch: Int
-    let lastUpdated: String
     let tempC: CGFloat
     let tempF: CGFloat
     let isDay: Int
     let condition: Condition
     let windMph, windKph: Double
-    let windDegree: Int
-    let windDir: String
     let pressureMB: CGFloat
     let pressureIn: CGFloat
     let precipMm, precipIn: CGFloat
     let humidity, cloud: Int
     let feelslikeC, feelslikeF: CGFloat
-    let visKM, visMiles, uv: CGFloat
-    let gustMph, gustKph: CGFloat
+    let uv: CGFloat
 
     enum CodingKeys: String, CodingKey {
-        case lastUpdatedEpoch = "last_updated_epoch"
-        case lastUpdated = "last_updated"
         case tempC = "temp_c"
         case tempF = "temp_f"
         case isDay = "is_day"
         case condition
         case windMph = "wind_mph"
         case windKph = "wind_kph"
-        case windDegree = "wind_degree"
-        case windDir = "wind_dir"
         case pressureMB = "pressure_mb"
         case pressureIn = "pressure_in"
         case precipMm = "precip_mm"
@@ -51,11 +42,7 @@ struct Current: Codable {
         case humidity, cloud
         case feelslikeC = "feelslike_c"
         case feelslikeF = "feelslike_f"
-        case visKM = "vis_km"
-        case visMiles = "vis_miles"
         case uv
-        case gustMph = "gust_mph"
-        case gustKph = "gust_kph"
     }
 }
 
