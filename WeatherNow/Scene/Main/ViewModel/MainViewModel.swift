@@ -63,11 +63,7 @@ class MainViewModel: NSObject, ObservableObject {
     var cityName: String {
         guard let location = weather?.location else { return "Loading..." }
         if location.country == "Azerbaijan" {
-            if location.region == "Baki" {
-                return "Baku"
-            } else {
-                return location.region
-            }
+            return location.region // MARK: Hierarchy is different in our Azerbaijan
         } else {
             return location.name
         }
