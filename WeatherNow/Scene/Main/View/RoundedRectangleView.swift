@@ -37,15 +37,15 @@ struct RoundedRectangleView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 12) {
                     if let weather {
-                        SmallIconWithTextCell(imageText: "temperature", title: "Feels Like", value: weather.current.feelslikeC, unit: "°", isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: weather.current.precipIn, unit: "%", isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "1000d", title: "UV Index", value: weather.current.uv, unit: "", isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "temperature", title: "Feels Like", value: weather.current.feelslikeC, unitOfValue: .temperature, isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: weather.current.precipIn, unitOfValue: .percentage, isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "1000d", title: "UV Index", value: weather.current.uv, unitOfValue: .none, isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     } else {
-                        SmallIconWithTextCell(imageText: "temperature", title: "Feels Like", value: 0, unit: "°", isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: 0, unit: "%", isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "1000d", title: "UV Index", value: 0, unit: "", isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "temperature", title: "Feels Like", value: 0, unitOfValue: .temperature, isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: 0, unitOfValue: .percentage, isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "1000d", title: "UV Index", value: 0, unitOfValue: .none, isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     }
@@ -53,15 +53,15 @@ struct RoundedRectangleView: View {
                 Spacer(minLength: 12)
                 VStack(alignment: .leading, spacing: 12) {
                     if let weather {
-                        SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: weather.current.windKph, unit: " km/h", isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: CGFloat(weather.current.humidity), unit: "%", isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "pressure", title: "Pressure", value: weather.current.pressureMB, unit: " hPa", isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: weather.current.windKph, unitOfValue: .speed, isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: CGFloat(weather.current.humidity), unitOfValue: .percentage, isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "pressure", title: "Pressure", value: weather.current.pressureMB, unitOfValue: .pressure, isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     } else {
-                        SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: 0, unit: " km/h", isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: 0, unit: "%", isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "pressure", title: "Pressure", value: 0, unit: " hPa", isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: 0, unitOfValue: .speed, isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: 0, unitOfValue: .percentage, isExpanded: $isExpanded)
+                        SmallIconWithTextCell(imageText: "pressure", title: "Pressure", value: 0, unitOfValue: .pressure, isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     }
@@ -108,13 +108,13 @@ struct RoundedRectangleView: View {
                 if let hours = weather?.forecast.forecastday[selectedDay].hour {
                     HStack(spacing: 32) {
                         ForEach(hours.indices, id: \.self) { index in
-                            HourlyDegreeCell(hour: hours[index])
+                            HourlyTemperatureView(hour: hours[index])
                         }
                     }
                     .padding(.vertical, 8)
                     .padding(.horizontal, 28)
                 } else {
-                    HourlyDegreeCell(hour: Hour(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "night", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0))
+                    HourlyTemperatureView(hour: Hour(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "night", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0))
                         .padding(.vertical, 8)
                         .padding(.horizontal, 28)
                 }

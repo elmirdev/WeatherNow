@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF058E802A8BAE55000A01BF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF058E7F2A8BAE55000A01BF /* Utils.swift */; };
 		EF11CD802A2F5A0600C04E33 /* RoundedRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF11CD7F2A2F5A0600C04E33 /* RoundedRectangleView.swift */; };
 		EF11CD822A2F5F5100C04E33 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF11CD812A2F5F5100C04E33 /* MainViewModel.swift */; };
-		EF4ACEAA2A2E993700D7BB14 /* HourlyDegreeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4ACEA92A2E993700D7BB14 /* HourlyDegreeCell.swift */; };
+		EF4ACEAA2A2E993700D7BB14 /* HourlyTemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4ACEA92A2E993700D7BB14 /* HourlyTemperatureView.swift */; };
 		EF4ACEB02A2E99AF00D7BB14 /* SmallIconWithTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4ACEAF2A2E99AF00D7BB14 /* SmallIconWithTextCell.swift */; };
 		EF4ACEB22A2E9EB300D7BB14 /* StatusOfDayAndDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4ACEB12A2E9EB300D7BB14 /* StatusOfDayAndDateView.swift */; };
 		EFA435022A2AADA2006420A9 /* WeatherNowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA435012A2AADA2006420A9 /* WeatherNowApp.swift */; };
@@ -25,9 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EF058E7F2A8BAE55000A01BF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		EF11CD7F2A2F5A0600C04E33 /* RoundedRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleView.swift; sourceTree = "<group>"; };
 		EF11CD812A2F5F5100C04E33 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		EF4ACEA92A2E993700D7BB14 /* HourlyDegreeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyDegreeCell.swift; sourceTree = "<group>"; };
+		EF4ACEA92A2E993700D7BB14 /* HourlyTemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyTemperatureView.swift; sourceTree = "<group>"; };
 		EF4ACEAF2A2E99AF00D7BB14 /* SmallIconWithTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallIconWithTextCell.swift; sourceTree = "<group>"; };
 		EF4ACEB12A2E9EB300D7BB14 /* StatusOfDayAndDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOfDayAndDateView.swift; sourceTree = "<group>"; };
 		EF83FA882A3718770008EE8E /* WeatherNow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherNow.entitlements; sourceTree = "<group>"; };
@@ -56,6 +58,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF058E7E2A8BADE0000A01BF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EF058E7F2A8BAE55000A01BF /* Utils.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		EF8657BB2A2E93F0003284BA /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,7 +106,7 @@
 			children = (
 				EFA435032A2AADA2006420A9 /* MainView.swift */,
 				EFA49CA32A2E1CD1006CCA16 /* TextAnimatableValue.swift */,
-				EF4ACEA92A2E993700D7BB14 /* HourlyDegreeCell.swift */,
+				EF4ACEA92A2E993700D7BB14 /* HourlyTemperatureView.swift */,
 				EF4ACEAF2A2E99AF00D7BB14 /* SmallIconWithTextCell.swift */,
 				EF4ACEB12A2E9EB300D7BB14 /* StatusOfDayAndDateView.swift */,
 				EF11CD7F2A2F5A0600C04E33 /* RoundedRectangleView.swift */,
@@ -131,6 +141,7 @@
 		EFA435002A2AADA2006420A9 /* WeatherNow */ = {
 			isa = PBXGroup;
 			children = (
+				EF058E7E2A8BADE0000A01BF /* Helpers */,
 				EF83FA882A3718770008EE8E /* WeatherNow.entitlements */,
 				EF8657BC2A2E9401003284BA /* Network */,
 				EF8657BB2A2E93F0003284BA /* Model */,
@@ -224,10 +235,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFA49C9F2A2E0E73006CCA16 /* NetworkManager.swift in Sources */,
-				EF4ACEAA2A2E993700D7BB14 /* HourlyDegreeCell.swift in Sources */,
+				EF4ACEAA2A2E993700D7BB14 /* HourlyTemperatureView.swift in Sources */,
 				EF4ACEB22A2E9EB300D7BB14 /* StatusOfDayAndDateView.swift in Sources */,
 				EFA435042A2AADA2006420A9 /* MainView.swift in Sources */,
 				EF11CD802A2F5A0600C04E33 /* RoundedRectangleView.swift in Sources */,
+				EF058E802A8BAE55000A01BF /* Utils.swift in Sources */,
 				EF11CD822A2F5F5100C04E33 /* MainViewModel.swift in Sources */,
 				EFF904832A854F6B0063828C /* APIKeys.swift in Sources */,
 				EF4ACEB02A2E99AF00D7BB14 /* SmallIconWithTextCell.swift in Sources */,

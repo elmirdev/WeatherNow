@@ -64,20 +64,20 @@ struct MainView: View {
                             )
                         
                         if !isExpanded {
-                            TextAnimatableValue(value: tempC, unit: "°")
+                            TextAnimatableValue(value: tempC, unitOfValue: .temperature)
                                 .fixedSize()
                                 .foregroundColor(.white)
                                 .font(.system(size: 88, weight: .heavy))
                                 .offset(x: 30, y: -30)
-                                .matchedGeometryEffect(id: "DegreText", in: animation)
+                                .matchedGeometryEffect(id: "TemperatureText", in: animation)
                         }
                     }
                     if isExpanded {
-                        TextAnimatableValue(value: tempC, unit: "°")
+                        TextAnimatableValue(value: tempC, unitOfValue: .temperature)
                             .fixedSize()
                             .foregroundColor(.white)
                             .font(.system(size: 44, weight: .heavy))
-                            .matchedGeometryEffect(id: "DegreText", in: animation)
+                            .matchedGeometryEffect(id: "TemperatureText", in: animation)
                         
                         StatusOfDayAndDateView(status: viewModel.conditionText, date: viewModel.localtimeText, isExpanded: $isExpanded)
                             .fixedSize()
