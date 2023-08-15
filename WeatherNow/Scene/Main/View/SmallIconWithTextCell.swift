@@ -11,7 +11,7 @@ struct SmallIconWithTextCell: View {
     let imageText: String
     let title: String
     let value: CGFloat
-    let unit: String
+    let unitOfValue: UnitOfValue
     @State private var animatableValue: CGFloat = 0
     @Binding var isExpanded: Bool
     @Namespace private var animation
@@ -40,7 +40,7 @@ struct SmallIconWithTextCell: View {
                                 .foregroundColor(.gray)
                                 .fixedSize()
                                 .matchedGeometryEffect(id: "TitleText", in: animation)
-                            TextAnimatableValue(value: animatableValue, unit: unit)
+                            TextAnimatableValue(value: animatableValue, unitOfValue: unitOfValue)
                                 .font(.system(size: 14, weight: .bold))
                                 .fixedSize()
                                 .matchedGeometryEffect(id: "ValueText", in: animation)
@@ -55,7 +55,7 @@ struct SmallIconWithTextCell: View {
                             .foregroundColor(.gray)
                             .fixedSize()
                             .matchedGeometryEffect(id: "TitleText", in: animation)
-                        TextAnimatableValue(value: animatableValue, unit: unit)
+                        TextAnimatableValue(value: animatableValue, unitOfValue: unitOfValue)
                             .font(.system(size: 14, weight: .bold))
                             .fixedSize()
                             .matchedGeometryEffect(id: "ValueText", in: animation)
@@ -74,6 +74,6 @@ struct SmallIconWithTextCell: View {
 
 struct SmallIconWithText_Previews: PreviewProvider {
     static var previews: some View {
-        SmallIconWithTextCell(imageText: "temperature", title: "Precipitation", value: 16, unit: "°", isExpanded: .constant(true))
+        SmallIconWithTextCell(imageText: "temperature", title: "Precipitation", value: 16, unitOfValue: .temperature, isExpanded: .constant(true))
     }
 }

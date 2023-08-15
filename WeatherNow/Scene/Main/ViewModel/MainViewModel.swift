@@ -9,11 +9,6 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-enum PeriodOfDay {
-    case day
-    case night
-}
-
 class MainViewModel: NSObject, ObservableObject {
 
     @Published var weather: WeatherModel?
