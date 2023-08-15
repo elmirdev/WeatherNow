@@ -69,7 +69,7 @@ struct MainView: View {
                                 .foregroundColor(.white)
                                 .font(.system(size: 88, weight: .heavy))
                                 .offset(x: 30, y: -30)
-                                .matchedGeometryEffect(id: "DegreText", in: animation)
+                                .matchedGeometryEffect(id: "TemperatureText", in: animation)
                         }
                     }
                     if isExpanded {
@@ -77,7 +77,7 @@ struct MainView: View {
                             .fixedSize()
                             .foregroundColor(.white)
                             .font(.system(size: 44, weight: .heavy))
-                            .matchedGeometryEffect(id: "DegreText", in: animation)
+                            .matchedGeometryEffect(id: "TemperatureText", in: animation)
                         
                         StatusOfDayAndDateView(status: viewModel.conditionText, date: viewModel.localtimeText, isExpanded: $isExpanded)
                             .fixedSize()
