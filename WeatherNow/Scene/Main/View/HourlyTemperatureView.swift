@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct HourlyDegreeCell: View {
+struct HourlyTemperatureView: View {
     let hour: Hour
     let mainViewModel = MainViewModel()
     
@@ -65,6 +65,6 @@ struct HourlyDegreeCell: View {
 
 struct HourlyDegreeCell_Previews: PreviewProvider {
     static var previews: some View {
-        HourlyDegreeCell(hour: Hour(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "day", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0))
+        HourlyTemperatureView(hour: Hour(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "day", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0))
     }
 }
