@@ -39,7 +39,7 @@ struct MainView: View {
                             .offset(x: viewModel.imageOffset.width, y: viewModel.imageOffset.height)
                             .onTapGesture {
                                 withAnimation(.spring()) {
-                                    viewModel.isExpanded.toggle()
+                                    toggleIsExpanded()
                                 }
                             }
                             .gesture(
@@ -87,7 +87,7 @@ struct MainView: View {
                         .opacity(viewModel.weather == nil ? 0 : 1)
                         .matchedGeometryEffect(id: "StatusText", in: animation)
                 }
-                RoundedRectangleView(weather: viewModel.weather, isExpanded: $viewModel.isExpanded, handleButton: toggleIsExpanded)
+                RoundedRectangleView(weather: viewModel.weather, isExpanded: $viewModel.isExpanded, buttonTapped: toggleIsExpanded)
                     .frame(maxWidth: 640)
                     .onTapGesture {
                         toggleIsExpanded()

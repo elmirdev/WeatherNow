@@ -15,7 +15,7 @@ struct RoundedRectangleView: View {
     @State var colors: [Color] = [.blue, .gray.opacity(0.5), .gray.opacity(0.5)]
     @State private var selectedDay = 0
     
-    var handleButton: () -> Void
+    var buttonTapped: () -> Void
     
     var body: some View {
         VStack {
@@ -24,7 +24,7 @@ struct RoundedRectangleView: View {
                     .fontWeight(.bold)
                 Spacer()
                 Button {
-                    handleButton()
+                    buttonTapped()
                 } label: {
                     Image(systemName: "chevron.up.circle.fill")
                         .foregroundColor(.gray.opacity(0.5))
@@ -147,6 +147,6 @@ struct RoundedRectangleView: View {
 
 struct RoundedRectangleView_Previews: PreviewProvider {
     static var previews: some View {
-        RoundedRectangleView(weather: WeatherModel(location: Location(name: "Baku", region: "Baku", country: "Azerbaijan", lat: 40, lon: 39, tzID: "", localtimeEpoch: 0, localtime: ""), current: Current(tempC: 24, tempF: 23, isDay: 0, condition: Condition(text: "Sunny", icon: "day", code: 1000), windMph: 19, windKph: 19, pressureMB: 19, pressureIn: 19, precipMm: 19, precipIn: 19, humidity: 12, cloud: 1, feelslikeC: 24, feelslikeF: 45, uv: 1), forecast: ForecastModel(forecastday: [Forecastday(date: "2023-08-07 00:00", day: Day(condition: Condition(text: "Sunny", icon: "day", code: 1000)), astro: Astro(sunrise: "", sunset: "", moonrise: "", moonset: ""), hour: [Hour(time: "", tempC: 24, tempF: 45, isDay: 0, condition: Condition(text: "", icon: "day", code: 1000), windMph: 12, windKph: 12, precipMm: 12, precipIn: 12, humidity: 12, cloud: 12, feelslikeC: 11, feelslikeF: 12)])])), isExpanded: .constant(true), handleButton: MainView().toggleIsExpanded)
+        RoundedRectangleView(weather: WeatherModel(location: Location(name: "Baku", region: "Baku", country: "Azerbaijan", lat: 40, lon: 39, tzID: "", localtimeEpoch: 0, localtime: ""), current: Current(tempC: 24, tempF: 23, isDay: 0, condition: Condition(text: "Sunny", icon: "day", code: 1000), windMph: 19, windKph: 19, pressureMB: 19, pressureIn: 19, precipMm: 19, precipIn: 19, humidity: 12, cloud: 1, feelslikeC: 24, feelslikeF: 45, uv: 1), forecast: ForecastModel(forecastday: [Forecastday(date: "2023-08-07 00:00", day: Day(condition: Condition(text: "Sunny", icon: "day", code: 1000)), astro: Astro(sunrise: "", sunset: "", moonrise: "", moonset: ""), hour: [Hour(time: "", tempC: 24, tempF: 45, isDay: 0, condition: Condition(text: "", icon: "day", code: 1000), windMph: 12, windKph: 12, precipMm: 12, precipIn: 12, humidity: 12, cloud: 12, feelslikeC: 11, feelslikeF: 12)])])), isExpanded: .constant(true), buttonTapped: MainView().toggleIsExpanded)
     }
 }
