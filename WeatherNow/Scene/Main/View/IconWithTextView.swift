@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SmallIconWithTextCell: View {
+struct IconWithTextView: View {
     let imageText: String
     let title: String
     let value: CGFloat
@@ -74,6 +74,6 @@ struct SmallIconWithTextCell: View {
 
 struct SmallIconWithText_Previews: PreviewProvider {
     static var previews: some View {
-        SmallIconWithTextCell(imageText: "temperature", title: "Precipitation", value: 16, unitOfValue: .temperature, isExpanded: .constant(true))
+        IconWithTextView(imageText: "temperature", title: "Precipitation", value: 16, unitOfValue: .temperature, isExpanded: .constant(true))
     }
 }
