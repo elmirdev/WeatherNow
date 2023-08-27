@@ -8,48 +8,23 @@
 import SwiftUI
 
 struct StatusOfDayView: View {
-    let status: String
-    let date: String
+    
+    let viewModel: StatusOfDayViewModel
     @Binding var isExpanded: Bool
     
     var body: some View {
         VStack(alignment: isExpanded ? .leading : .center, spacing: 8) {
-            Text(status)
+            Text(viewModel.status)
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
-            Text(getHour(dateString: date))
+            Text(viewModel.hour)
                 .foregroundColor(.white)
-        }
-    }
-    
-    func getHour(dateString: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-
-        if let date = dateFormatter.date(from: dateString) {
-            let calendar = Calendar.current
-            
-            // MARK: Week Day
-            let weekFormatter = DateFormatter()
-            weekFormatter.dateFormat = "EEE"
-            let weekDay = weekFormatter.string(from: date)
-            
-            // MARK: Day
-            let day = calendar.component(.day, from: date)
-            
-            // MARK: Month Name
-            let monthFormatter = DateFormatter()
-            monthFormatter.dateFormat = "MMM"
-            let monthName = monthFormatter.string(from: date)
-            return "\(weekDay) \(day) \(monthName)"
-        } else {
-            return "Loading..."
         }
     }
 }
 
 struct StatusOfDayAndDateView_Previews: PreviewProvider {
     static var previews: some View {
-        StatusOfDayView(status: "It's raining", date: "June", isExpanded: .constant(false))
+        StatusOfDayView(viewModel: .init(status: "Cloudy", date: "2023-08-07 18:30"), isExpanded: .constant(false))
     }
 }

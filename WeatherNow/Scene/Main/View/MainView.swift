@@ -73,7 +73,7 @@ struct MainView: View {
                             .font(.system(size: 44, weight: .heavy))
                             .matchedGeometryEffect(id: "TemperatureText", in: animation)
                         
-                        StatusOfDayView(status: viewModel.conditionText, date: viewModel.localtimeText, isExpanded: $viewModel.isExpanded)
+                        StatusOfDayView(viewModel: StatusOfDayViewModel(status: viewModel.conditionText, date: viewModel.localtimeText), isExpanded: $viewModel.isExpanded)
                             .fixedSize()
                             .opacity(viewModel.weather == nil ? 0 : 1)
                             .padding(.horizontal)
@@ -82,7 +82,7 @@ struct MainView: View {
                 }
                 Spacer()
                 if !viewModel.isExpanded {
-                    StatusOfDayView(status: viewModel.conditionText, date: viewModel.localtimeText, isExpanded: $viewModel.isExpanded)
+                    StatusOfDayView(viewModel: StatusOfDayViewModel(status: viewModel.conditionText, date: viewModel.localtimeText), isExpanded: $viewModel.isExpanded)
                         .fixedSize()
                         .opacity(viewModel.weather == nil ? 0 : 1)
                         .matchedGeometryEffect(id: "StatusText", in: animation)

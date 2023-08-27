@@ -11,6 +11,7 @@
 		EF11CD802A2F5A0600C04E33 /* RoundedRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF11CD7F2A2F5A0600C04E33 /* RoundedRectangleView.swift */; };
 		EF11CD822A2F5F5100C04E33 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF11CD812A2F5F5100C04E33 /* MainViewModel.swift */; };
 		EF37FB8E2A9BEAFD00D8631F /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF37FB8D2A9BEAFD00D8631F /* DateHelper.swift */; };
+		EF37FB902A9BED4900D8631F /* StatusOfDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF37FB8F2A9BED4900D8631F /* StatusOfDayViewModel.swift */; };
 		EF4ACEAA2A2E993700D7BB14 /* HourlyTemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4ACEA92A2E993700D7BB14 /* HourlyTemperatureView.swift */; };
 		EF4ACEB02A2E99AF00D7BB14 /* SmallIconWithTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4ACEAF2A2E99AF00D7BB14 /* SmallIconWithTextCell.swift */; };
 		EF4ACEB22A2E9EB300D7BB14 /* StatusOfDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4ACEB12A2E9EB300D7BB14 /* StatusOfDayView.swift */; };
@@ -31,6 +32,7 @@
 		EF11CD7F2A2F5A0600C04E33 /* RoundedRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleView.swift; sourceTree = "<group>"; };
 		EF11CD812A2F5F5100C04E33 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		EF37FB8D2A9BEAFD00D8631F /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		EF37FB8F2A9BED4900D8631F /* StatusOfDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOfDayViewModel.swift; sourceTree = "<group>"; };
 		EF4ACEA92A2E993700D7BB14 /* HourlyTemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyTemperatureView.swift; sourceTree = "<group>"; };
 		EF4ACEAF2A2E99AF00D7BB14 /* SmallIconWithTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallIconWithTextCell.swift; sourceTree = "<group>"; };
 		EF4ACEB12A2E9EB300D7BB14 /* StatusOfDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOfDayView.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				EF11CD812A2F5F5100C04E33 /* MainViewModel.swift */,
+				EF37FB8F2A9BED4900D8631F /* StatusOfDayViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				EF4ACEB22A2E9EB300D7BB14 /* StatusOfDayView.swift in Sources */,
 				EFA435042A2AADA2006420A9 /* MainView.swift in Sources */,
 				EF11CD802A2F5A0600C04E33 /* RoundedRectangleView.swift in Sources */,
+				EF37FB902A9BED4900D8631F /* StatusOfDayViewModel.swift in Sources */,
 				EF37FB8E2A9BEAFD00D8631F /* DateHelper.swift in Sources */,
 				EF058E802A8BAE55000A01BF /* Utils.swift in Sources */,
 				EF11CD822A2F5F5100C04E33 /* MainViewModel.swift in Sources */,
