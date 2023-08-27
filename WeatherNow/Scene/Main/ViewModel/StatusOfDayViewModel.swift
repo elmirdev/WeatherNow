@@ -21,6 +21,6 @@ class StatusOfDayViewModel {
     }
     
     func getHour(dateString: String) -> String {
-        DateHelper.getFormattedDate(dateString: dateString, dateFormat: .hour)
+        DateHelper.getFormattedDate(dateString: dateString, dateFormat: .weekDayMonth)
     }
 }
