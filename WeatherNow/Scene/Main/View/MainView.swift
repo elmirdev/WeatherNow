@@ -8,18 +8,12 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var bgColor = Color.black
-    @State private var tempC: CGFloat = 0
-    @State private var imageOffset = CGSize(width: 0, height: UIScreen.main.bounds.height)
-    @State private var isExpanded = false
-    
     @ObservedObject private var viewModel = MainViewModel()
-    
     @Namespace private var animation
     
     var body: some View {
         ZStack {
-            bgColor
+            viewModel.bgColor
                 .ignoresSafeArea()
             VStack(spacing: 0) {
                 HStack(alignment: .center, spacing: 2) {
@@ -40,31 +34,31 @@ struct MainView: View {
                         Image(viewModel.imageName)
                             .resizable()
                             .scaledToFit()
-                            .padding(isExpanded ? 0 : 16)
-                            .frame(maxWidth: isExpanded ? 180 : 320,maxHeight: isExpanded ? 180 : 320)
-                            .offset(x: imageOffset.width, y: imageOffset.height)
+                            .padding(viewModel.isExpanded ? 0 : 16)
+                            .frame(maxWidth: viewModel.isExpanded ? 180 : 320,maxHeight: viewModel.isExpanded ? 180 : 320)
+                            .offset(x: viewModel.imageOffset.width, y: viewModel.imageOffset.height)
                             .onTapGesture {
                                 withAnimation(.spring()) {
-                                    isExpanded.toggle()
+                                    toggleIsExpanded()
                                 }
                             }
                             .gesture(
                                 DragGesture()
                                     .onChanged({ gesture in
                                         withAnimation(.easeInOut(duration: 0.5)) {
-                                            self.imageOffset.height = gesture.translation.height
-                                            self.imageOffset.width = gesture.translation.width
+                                            viewModel.imageOffset.height = gesture.translation.height
+                                            viewModel.imageOffset.width = gesture.translation.width
                                         }
                                     })
                                     .onEnded({ _ in
                                         withAnimation(.easeOut(duration: 0.75)) {
-                                            self.imageOffset = .zero
+                                            viewModel.imageOffset = .zero
                                         }
                                     })
                             )
                         
-                        if !isExpanded {
-                            TextAnimatableValue(value: tempC, unitOfValue: .temperature)
+                        if !viewModel.isExpanded {
+                            TextAnimatableValue(value: viewModel.tempC, valueType: .temperature)
                                 .fixedSize()
                                 .foregroundColor(.white)
                                 .font(.system(size: 88, weight: .heavy))
@@ -72,14 +66,14 @@ struct MainView: View {
                                 .matchedGeometryEffect(id: "TemperatureText", in: animation)
                         }
                     }
-                    if isExpanded {
-                        TextAnimatableValue(value: tempC, unitOfValue: .temperature)
+                    if viewModel.isExpanded {
+                        TextAnimatableValue(value: viewModel.tempC, valueType: .temperature)
                             .fixedSize()
                             .foregroundColor(.white)
                             .font(.system(size: 44, weight: .heavy))
                             .matchedGeometryEffect(id: "TemperatureText", in: animation)
                         
-                        StatusOfDayAndDateView(status: viewModel.conditionText, date: viewModel.localtimeText, isExpanded: $isExpanded)
+                        StatusOfDayView(viewModel: StatusOfDayViewModel(status: viewModel.conditionText, date: viewModel.localtimeText), isExpanded: $viewModel.isExpanded)
                             .fixedSize()
                             .opacity(viewModel.weather == nil ? 0 : 1)
                             .padding(.horizontal)
@@ -87,13 +81,13 @@ struct MainView: View {
                     }
                 }
                 Spacer()
-                if !isExpanded {
-                    StatusOfDayAndDateView(status: viewModel.conditionText, date: viewModel.localtimeText, isExpanded: $isExpanded)
+                if !viewModel.isExpanded {
+                    StatusOfDayView(viewModel: StatusOfDayViewModel(status: viewModel.conditionText, date: viewModel.localtimeText), isExpanded: $viewModel.isExpanded)
                         .fixedSize()
                         .opacity(viewModel.weather == nil ? 0 : 1)
                         .matchedGeometryEffect(id: "StatusText", in: animation)
                 }
-                RoundedRectangleView(weather: viewModel.weather, isExpanded: $isExpanded, handleButton: toggleIsExpanded)
+                RoundedRectangleView(viewModel: RoundedRectangleViewModel(weather: viewModel.weather), isExpanded: $viewModel.isExpanded, buttonTapped: toggleIsExpanded)
                     .frame(maxWidth: 640)
                     .onTapGesture {
                         toggleIsExpanded()
@@ -101,11 +95,11 @@ struct MainView: View {
             }
             .onChange(of: viewModel.weather?.current.tempC) { newValue in
                 withAnimation(.easeInOut(duration: 1.5)) {
-                    self.tempC = viewModel.weather?.current.tempC ?? 0
-                    imageOffset = .zero
+                    viewModel.tempC = viewModel.weather?.current.tempC ?? 0
+                    viewModel.imageOffset = .zero
                 }
                 withAnimation(.easeInOut(duration: 2)) {
-                    bgColor = viewModel.bgColor
+                    viewModel.bgColor = viewModel.getBGColor
                 }
             }
         }
@@ -113,7 +107,7 @@ struct MainView: View {
     
     func toggleIsExpanded() {
         withAnimation(.spring()) {
-            isExpanded.toggle()
+            viewModel.isExpanded.toggle()
         }
     }
 }

@@ -9,13 +9,10 @@ import SwiftUI
 
 struct RoundedRectangleView: View {
     
-    let weather: WeatherModel?
+    @ObservedObject var viewModel: RoundedRectangleViewModel
     @Binding var isExpanded: Bool
     
-    @State var colors: [Color] = [.blue, .gray.opacity(0.5), .gray.opacity(0.5)]
-    @State private var selectedDay = 0
-    
-    var handleButton: () -> Void
+    var buttonTapped: () -> Void
     
     var body: some View {
         VStack {
@@ -24,7 +21,7 @@ struct RoundedRectangleView: View {
                     .fontWeight(.bold)
                 Spacer()
                 Button {
-                    handleButton()
+                    buttonTapped()
                 } label: {
                     Image(systemName: "chevron.up.circle.fill")
                         .foregroundColor(.gray.opacity(0.5))
@@ -36,32 +33,32 @@ struct RoundedRectangleView: View {
             .padding([.horizontal, .top])
             HStack {
                 VStack(alignment: .leading, spacing: 12) {
-                    if let weather {
-                        SmallIconWithTextCell(imageText: "temperature", title: "Feels Like", value: weather.current.feelslikeC, unitOfValue: .temperature, isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: weather.current.precipIn, unitOfValue: .percentage, isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "1000d", title: "UV Index", value: weather.current.uv, unitOfValue: .none, isExpanded: $isExpanded)
+                    if let weather = viewModel.weather{
+                        IconWithTextView(viewModel: IconWithTextViewModel(value: weather.current.feelslikeC, valueType: .temperature), isExpanded: $isExpanded)
+                        IconWithTextView(viewModel: IconWithTextViewModel(value: weather.current.feelslikeC, valueType: .precipitation), isExpanded: $isExpanded)
+                        IconWithTextView(viewModel: IconWithTextViewModel(value: weather.current.uv, valueType: .uv), isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     } else {
-                        SmallIconWithTextCell(imageText: "temperature", title: "Feels Like", value: 0, unitOfValue: .temperature, isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "precipitation", title: "Precipitation", value: 0, unitOfValue: .percentage, isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "1000d", title: "UV Index", value: 0, unitOfValue: .none, isExpanded: $isExpanded)
+                        IconWithTextView(viewModel: IconWithTextViewModel(value: 0, valueType: .temperature), isExpanded: $isExpanded)
+                        IconWithTextView(viewModel: IconWithTextViewModel(value: 0, valueType: .precipitation), isExpanded: $isExpanded)
+                        IconWithTextView(viewModel: IconWithTextViewModel(value: 0, valueType: .uv), isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     }
                 }
                 Spacer(minLength: 12)
                 VStack(alignment: .leading, spacing: 12) {
-                    if let weather {
-                        SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: weather.current.windKph, unitOfValue: .speed, isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: CGFloat(weather.current.humidity), unitOfValue: .percentage, isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "pressure", title: "Pressure", value: weather.current.pressureMB, unitOfValue: .pressure, isExpanded: $isExpanded)
+                    if let weather = viewModel.weather {
+                        IconWithTextView(viewModel: IconWithTextViewModel(value: weather.current.windKph, valueType: .wind), isExpanded: $isExpanded)
+                        IconWithTextView(viewModel: IconWithTextViewModel(value: CGFloat(weather.current.humidity), valueType: .humidity), isExpanded: $isExpanded)
+                        IconWithTextView(viewModel: IconWithTextViewModel(value: weather.current.pressureMB, valueType: .pressure), isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     } else {
-                        SmallIconWithTextCell(imageText: "wind", title: "Wind Speed", value: 0, unitOfValue: .speed, isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "humidity", title: "Humidity", value: 0, unitOfValue: .percentage, isExpanded: $isExpanded)
-                        SmallIconWithTextCell(imageText: "pressure", title: "Pressure", value: 0, unitOfValue: .pressure, isExpanded: $isExpanded)
+                        IconWithTextView(viewModel: IconWithTextViewModel(value: 0, valueType: .wind), isExpanded: $isExpanded)
+                        IconWithTextView(viewModel: IconWithTextViewModel(value: 0, valueType: .humidity), isExpanded: $isExpanded)
+                        IconWithTextView(viewModel: IconWithTextViewModel(value: 0, valueType: .pressure), isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     }
@@ -71,7 +68,7 @@ struct RoundedRectangleView: View {
             Divider()
                 .padding(.horizontal)
             
-            if let days = weather?.forecast.forecastday {
+            if let days = viewModel.weather?.forecast.forecastday {
                 HStack {
                     ForEach(days.indices, id: \.self) { index in
                         let day = getDayAndMonth(dateString: days[index].date).0
@@ -84,14 +81,14 @@ struct RoundedRectangleView: View {
                             .padding(.horizontal, 8)
                             .background {
                                 Capsule()
-                                    .fill(colors[index])
+                                    .fill(viewModel.colors[index])
                             }.onTapGesture {
                                 withAnimation(.spring()) {
-                                    for colorIndex in 0..<colors.count {
-                                        colors[colorIndex] = .gray.opacity(0.5)
+                                    for colorIndex in 0..<viewModel.colors.count {
+                                        viewModel.colors[colorIndex] = .gray.opacity(0.5)
                                     }
-                                    colors[index] = .blue
-                                    selectedDay = index
+                                    viewModel.colors[index] = .blue
+                                    viewModel.selectedDay = index
                                 }
                             }
                     }
@@ -105,16 +102,16 @@ struct RoundedRectangleView: View {
             }
             
             ScrollView(.horizontal, showsIndicators: false) {
-                if let hours = weather?.forecast.forecastday[selectedDay].hour {
+                if let hours = viewModel.weather?.forecast.forecastday[viewModel.selectedDay].hour {
                     HStack(spacing: 32) {
                         ForEach(hours.indices, id: \.self) { index in
-                            HourlyTemperatureView(hour: hours[index])
+                            HourlyTemperatureView(viewModel: HourlyTemperatureViewModel(hour: hours[index]))
                         }
                     }
                     .padding(.vertical, 8)
                     .padding(.horizontal, 28)
                 } else {
-                    HourlyTemperatureView(hour: Hour(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "night", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0))
+                    HourlyTemperatureView(viewModel: HourlyTemperatureViewModel(hour: Hour(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "night", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0)))
                         .padding(.vertical, 8)
                         .padding(.horizontal, 28)
                 }
@@ -147,6 +144,6 @@ struct RoundedRectangleView: View {
 
 struct RoundedRectangleView_Previews: PreviewProvider {
     static var previews: some View {
-        RoundedRectangleView(weather: WeatherModel(location: Location(name: "Baku", region: "Baku", country: "Azerbaijan", lat: 40, lon: 39, tzID: "", localtimeEpoch: 0, localtime: ""), current: Current(tempC: 24, tempF: 23, isDay: 0, condition: Condition(text: "Sunny", icon: "day", code: 1000), windMph: 19, windKph: 19, pressureMB: 19, pressureIn: 19, precipMm: 19, precipIn: 19, humidity: 12, cloud: 1, feelslikeC: 24, feelslikeF: 45, uv: 1), forecast: ForecastModel(forecastday: [Forecastday(date: "2023-08-07 00:00", day: Day(condition: Condition(text: "Sunny", icon: "day", code: 1000)), astro: Astro(sunrise: "", sunset: "", moonrise: "", moonset: ""), hour: [Hour(time: "", tempC: 24, tempF: 45, isDay: 0, condition: Condition(text: "", icon: "day", code: 1000), windMph: 12, windKph: 12, precipMm: 12, precipIn: 12, humidity: 12, cloud: 12, feelslikeC: 11, feelslikeF: 12)])])), isExpanded: .constant(true), handleButton: MainView().toggleIsExpanded)
+        RoundedRectangleView(viewModel: RoundedRectangleViewModel(weather: WeatherModel(location: Location(name: "Baku", region: "Baku", country: "Azerbaijan", lat: 40, lon: 39, tzID: "", localtimeEpoch: 0, localtime: ""), current: Current(tempC: 24, tempF: 23, isDay: 0, condition: Condition(text: "Sunny", icon: "day", code: 1000), windMph: 19, windKph: 19, pressureMB: 19, pressureIn: 19, precipMm: 19, precipIn: 19, humidity: 12, cloud: 1, feelslikeC: 24, feelslikeF: 45, uv: 1), forecast: ForecastModel(forecastday: [Forecastday(date: "2023-08-07 00:00", day: Day(condition: Condition(text: "Sunny", icon: "day", code: 1000)), astro: Astro(sunrise: "", sunset: "", moonrise: "", moonset: ""), hour: [Hour(time: "", tempC: 24, tempF: 45, isDay: 0, condition: Condition(text: "", icon: "day", code: 1000), windMph: 12, windKph: 12, precipMm: 12, precipIn: 12, humidity: 12, cloud: 12, feelslikeC: 11, feelslikeF: 12)])]))), isExpanded: .constant(true), buttonTapped: MainView().toggleIsExpanded)
     }
 }

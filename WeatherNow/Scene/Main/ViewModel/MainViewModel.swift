@@ -11,7 +11,14 @@ import CoreLocation
 
 class MainViewModel: NSObject, ObservableObject {
 
+    // MARK: - Properties
     @Published var weather: WeatherModel?
+    
+    @Published var bgColor = Color.black
+    @Published var tempC: CGFloat = 0
+    @Published var imageOffset = CGSize(width: 0, height: UIScreen.main.bounds.height)
+    @Published var isExpanded = false
+
     private let locationManager = CLLocationManager()
         
         override init() {
@@ -19,6 +26,7 @@ class MainViewModel: NSObject, ObservableObject {
             fetchUserLocation()
         }
     
+    // MARK: - Helpers
     private func getData(lat: CGFloat, long: CGFloat) {
         NetworkManager.shared.getWeather(lat: lat, long: long) { weather in
             DispatchQueue.main.async {
@@ -39,17 +47,13 @@ class MainViewModel: NSObject, ObservableObject {
         }
     }
     
+    // MARK: - Variables
     var periodOfHour: PeriodOfDay {
-        guard let icon = weather?.current.condition.icon else { return .day }
-        if icon.contains("day") {
-            return .day
-        } else if icon.contains("night") {
-            return .night
-        }
-        return .day
+        guard let imageText = weather?.current.condition.icon else { return .day }
+        return WeatherHelper.getPeriodOfDay(imageText: imageText)
     }
     
-    var bgColor: Color {
+    var getBGColor: Color {
         guard let code = weather?.current.condition.code else { return .black }
         let colorName = getImageName(code: code, periodOfDay: periodOfHour)
         return Color(colorName)
@@ -79,44 +83,10 @@ class MainViewModel: NSObject, ObservableObject {
     }
     
     func getImageName(code: Int, periodOfDay: PeriodOfDay) -> String {
-        switch code {
-        case 1000:
-            return periodOfDay == .day ? "1000d" : "1000n"
-        case 1003:
-            return periodOfDay == .day ? "1003d" : "1003n"
-        case 1006, 1009, 1030:
-            return periodOfDay == .day ? "1006d" : "1006n"
-        case 1063, 1180, 1186, 1192, 1240, 1243, 1246:
-            return periodOfDay == .day ? "1063d" : "1063n"
-        case 1066, 1069, 1210, 1216, 1222, 1255, 1258, 1261, 1264:
-            return periodOfDay == .day ? "1066d" : "1066n"
-        case 1072, 1213, 1219, 1225, 1237:
-            return periodOfDay == .day ? "1072d" : "1072n"
-        case 1087, 1273:
-            return periodOfDay == .day ? "1087d" : "1087n"
-        case 1114, 1117:
-            return periodOfDay == .day ? "1114d" : "1114n"
-        case 1135:
-            return periodOfDay == .day ? "1135d" : "1135n"
-        case 1147:
-            return periodOfDay == .day ? "1147d" : "1147n"
-        case 1150, 1153, 1183, 1189, 1195:
-            return periodOfDay == .day ? "1150d" : "1150n"
-        case 1168, 1171, 1198, 1201, 1204, 1207:
-            return periodOfDay == .day ? "1168d" : "1168n"
-        case 1249, 1252:
-            return periodOfDay == .day ? "1249d" : "1249n"
-        case 1276:
-            return periodOfDay == .day ? "1276d" : "1276n"
-        case 1279:
-            return periodOfDay == .day ? "1279d" : "1279n"
-        case 1282:
-            return periodOfDay == .day ? "1282d" : "1282n"
-        default:
-            return periodOfDay == .day ? "1006d" : "1006n"
-        }
+        WeatherHelper.getImageName(code: code, periodOfDay: periodOfDay)
     }
     
+    // MARK: - Location
     private func fetchUserLocation() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -125,6 +95,7 @@ class MainViewModel: NSObject, ObservableObject {
     }
 }
 
+// MARK: - CLLocationManagerDelegate
 extension MainViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let userLocation = locations.last else { return }
