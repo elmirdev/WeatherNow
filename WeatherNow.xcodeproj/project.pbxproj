@@ -13,6 +13,7 @@
 		EF37FB8E2A9BEAFD00D8631F /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF37FB8D2A9BEAFD00D8631F /* DateHelper.swift */; };
 		EF37FB902A9BED4900D8631F /* StatusOfDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF37FB8F2A9BED4900D8631F /* StatusOfDayViewModel.swift */; };
 		EF37FB942A9BF18100D8631F /* WeatherHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF37FB932A9BF18100D8631F /* WeatherHelper.swift */; };
+		EF37FB962A9BF4DD00D8631F /* HourlyTemperatureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF37FB952A9BF4DD00D8631F /* HourlyTemperatureViewModel.swift */; };
 		EF4ACEAA2A2E993700D7BB14 /* HourlyTemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4ACEA92A2E993700D7BB14 /* HourlyTemperatureView.swift */; };
 		EF4ACEB02A2E99AF00D7BB14 /* SmallIconWithTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4ACEAF2A2E99AF00D7BB14 /* SmallIconWithTextCell.swift */; };
 		EF4ACEB22A2E9EB300D7BB14 /* StatusOfDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4ACEB12A2E9EB300D7BB14 /* StatusOfDayView.swift */; };
@@ -35,6 +36,7 @@
 		EF37FB8D2A9BEAFD00D8631F /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		EF37FB8F2A9BED4900D8631F /* StatusOfDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOfDayViewModel.swift; sourceTree = "<group>"; };
 		EF37FB932A9BF18100D8631F /* WeatherHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHelper.swift; sourceTree = "<group>"; };
+		EF37FB952A9BF4DD00D8631F /* HourlyTemperatureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyTemperatureViewModel.swift; sourceTree = "<group>"; };
 		EF4ACEA92A2E993700D7BB14 /* HourlyTemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyTemperatureView.swift; sourceTree = "<group>"; };
 		EF4ACEAF2A2E99AF00D7BB14 /* SmallIconWithTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallIconWithTextCell.swift; sourceTree = "<group>"; };
 		EF4ACEB12A2E9EB300D7BB14 /* StatusOfDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOfDayView.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			children = (
 				EF11CD812A2F5F5100C04E33 /* MainViewModel.swift */,
 				EF37FB8F2A9BED4900D8631F /* StatusOfDayViewModel.swift */,
+				EF37FB952A9BF4DD00D8631F /* HourlyTemperatureViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				EFA49C9F2A2E0E73006CCA16 /* NetworkManager.swift in Sources */,
 				EF4ACEAA2A2E993700D7BB14 /* HourlyTemperatureView.swift in Sources */,
 				EF4ACEB22A2E9EB300D7BB14 /* StatusOfDayView.swift in Sources */,
+				EF37FB962A9BF4DD00D8631F /* HourlyTemperatureViewModel.swift in Sources */,
 				EFA435042A2AADA2006420A9 /* MainView.swift in Sources */,
 				EF11CD802A2F5A0600C04E33 /* RoundedRectangleView.swift in Sources */,
 				EF37FB902A9BED4900D8631F /* StatusOfDayViewModel.swift in Sources */,
