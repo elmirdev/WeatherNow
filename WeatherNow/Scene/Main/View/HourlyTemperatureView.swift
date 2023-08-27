@@ -21,7 +21,7 @@ struct HourlyTemperatureView: View {
                 .scaledToFit()
                 .frame(width: 28, height: 28)
                 .padding(2)
-            TextAnimatableValue(value: viewModel.animatableValue, unitOfValue: .temperature)
+            TextAnimatableValue(value: viewModel.animatableValue, valueType: .temperature)
                 .font(.system(size: 16, weight: .semibold))
         }.onAppear {
             withAnimation(.easeInOut(duration: 2)) {

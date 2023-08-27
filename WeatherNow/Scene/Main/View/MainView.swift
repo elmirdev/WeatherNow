@@ -58,7 +58,7 @@ struct MainView: View {
                             )
                         
                         if !viewModel.isExpanded {
-                            TextAnimatableValue(value: viewModel.tempC, unitOfValue: .temperature)
+                            TextAnimatableValue(value: viewModel.tempC, valueType: .temperature)
                                 .fixedSize()
                                 .foregroundColor(.white)
                                 .font(.system(size: 88, weight: .heavy))
@@ -67,7 +67,7 @@ struct MainView: View {
                         }
                     }
                     if viewModel.isExpanded {
-                        TextAnimatableValue(value: viewModel.tempC, unitOfValue: .temperature)
+                        TextAnimatableValue(value: viewModel.tempC, valueType: .temperature)
                             .fixedSize()
                             .foregroundColor(.white)
                             .font(.system(size: 44, weight: .heavy))

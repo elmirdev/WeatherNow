@@ -10,7 +10,7 @@ import SwiftUI
 
 struct TextAnimatableValue: View, Animatable {
     var value: CGFloat
-    var unitOfValue: UnitOfValue
+    var valueType: ValueType
 
     var animatableData: CGFloat {
         get { value }
@@ -20,6 +20,6 @@ struct TextAnimatableValue: View, Animatable {
     }
     
     var body: some View {
-        Text("\(String(format: "%.0f", value))\(unitOfValue.unit)")
+        Text("\(String(format: "%.0f", value))\(valueType.unit)")
     }
 }

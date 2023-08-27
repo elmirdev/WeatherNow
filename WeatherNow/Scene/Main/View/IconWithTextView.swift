@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct IconWithTextView: View {
-    let imageText: String
-    let title: String
-    let value: CGFloat
-    let unitOfValue: UnitOfValue
-    @State private var animatableValue: CGFloat = 0
+    @ObservedObject var viewModel: IconWithTextViewModel
     @Binding var isExpanded: Bool
     @Namespace private var animation
     
@@ -23,7 +19,7 @@ struct IconWithTextView: View {
                 .frame(height: isExpanded ? 96 : 48)
             HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 16) {
-                    Image(imageText)
+                    Image(viewModel.imageText)
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 24, maxHeight: 24)
@@ -34,13 +30,13 @@ struct IconWithTextView: View {
                         }
                     if isExpanded {
                         VStack(alignment: .leading) {
-                            Text(title)
+                            Text(viewModel.title)
                                 .font(.system(size: 14))
                                 .fontWeight(.medium)
                                 .foregroundColor(.gray)
                                 .fixedSize()
                                 .matchedGeometryEffect(id: "TitleText", in: animation)
-                            TextAnimatableValue(value: animatableValue, unitOfValue: unitOfValue)
+                            TextAnimatableValue(value: viewModel.animatableValue, valueType: viewModel.valueType)
                                 .font(.system(size: 14, weight: .bold))
                                 .fixedSize()
                                 .matchedGeometryEffect(id: "ValueText", in: animation)
@@ -49,13 +45,13 @@ struct IconWithTextView: View {
                 }
                 if !isExpanded {
                     VStack(alignment: .leading) {
-                        Text(title)
+                        Text(viewModel.title)
                             .font(.system(size: 14))
                             .fontWeight(.medium)
                             .foregroundColor(.gray)
                             .fixedSize()
                             .matchedGeometryEffect(id: "TitleText", in: animation)
-                        TextAnimatableValue(value: animatableValue, unitOfValue: unitOfValue)
+                        TextAnimatableValue(value: viewModel.animatableValue, valueType: viewModel.valueType)
                             .font(.system(size: 14, weight: .bold))
                             .fixedSize()
                             .matchedGeometryEffect(id: "ValueText", in: animation)
@@ -65,7 +61,7 @@ struct IconWithTextView: View {
             .padding(.horizontal, 12)
             .onAppear {
                 withAnimation(.easeInOut(duration: 2)) {
-                    self.animatableValue = value
+                    viewModel.animatableValue = viewModel.value
                 }
             }
         }
@@ -74,6 +70,6 @@ struct IconWithTextView: View {
 
 struct SmallIconWithText_Previews: PreviewProvider {
     static var previews: some View {
-        IconWithTextView(imageText: "temperature", title: "Precipitation", value: 16, unitOfValue: .temperature, isExpanded: .constant(true))
+        IconWithTextView(viewModel: .init(value: 20, valueType: .humidity), isExpanded: .constant(true))
     }
 }
