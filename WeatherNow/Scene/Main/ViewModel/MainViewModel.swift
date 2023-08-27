@@ -49,13 +49,8 @@ class MainViewModel: NSObject, ObservableObject {
     
     // MARK: - Variables
     var periodOfHour: PeriodOfDay {
-        guard let icon = weather?.current.condition.icon else { return .day }
-        if icon.contains("day") {
-            return .day
-        } else if icon.contains("night") {
-            return .night
-        }
-        return .day
+        guard let imageText = weather?.current.condition.icon else { return .day }
+        return WeatherHelper.getPeriodOfDay(imageText: imageText)
     }
     
     var getBGColor: Color {

@@ -8,6 +8,16 @@
 import Foundation
 
 class WeatherHelper {
+    
+    public static func getPeriodOfDay(imageText: String) -> PeriodOfDay {
+        if imageText.contains("day") {
+            return .day
+        } else if imageText.contains("night") {
+            return .night
+        } else {
+            return .day
+        }
+    }
     public static func getImageName(code: Int, periodOfDay: PeriodOfDay) -> String {
         switch code {
         case 1000:
