@@ -11,7 +11,14 @@ import CoreLocation
 
 class MainViewModel: NSObject, ObservableObject {
 
+    // MARK: - Properties
     @Published var weather: WeatherModel?
+    
+    @Published var bgColor = Color.black
+    @Published var tempC: CGFloat = 0
+    @Published var imageOffset = CGSize(width: 0, height: UIScreen.main.bounds.height)
+    @Published var isExpanded = false
+
     private let locationManager = CLLocationManager()
         
         override init() {
@@ -19,6 +26,7 @@ class MainViewModel: NSObject, ObservableObject {
             fetchUserLocation()
         }
     
+    // MARK: - Helpers
     private func getData(lat: CGFloat, long: CGFloat) {
         NetworkManager.shared.getWeather(lat: lat, long: long) { weather in
             DispatchQueue.main.async {
@@ -39,6 +47,7 @@ class MainViewModel: NSObject, ObservableObject {
         }
     }
     
+    // MARK: - Variables
     var periodOfHour: PeriodOfDay {
         guard let icon = weather?.current.condition.icon else { return .day }
         if icon.contains("day") {
@@ -49,7 +58,7 @@ class MainViewModel: NSObject, ObservableObject {
         return .day
     }
     
-    var bgColor: Color {
+    var getBGColor: Color {
         guard let code = weather?.current.condition.code else { return .black }
         let colorName = getImageName(code: code, periodOfDay: periodOfHour)
         return Color(colorName)
@@ -117,6 +126,7 @@ class MainViewModel: NSObject, ObservableObject {
         }
     }
     
+    // MARK: - Location
     private func fetchUserLocation() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -125,6 +135,7 @@ class MainViewModel: NSObject, ObservableObject {
     }
 }
 
+// MARK: - CLLocationManagerDelegate
 extension MainViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let userLocation = locations.last else { return }
