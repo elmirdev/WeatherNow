@@ -87,7 +87,7 @@ struct MainView: View {
                         .opacity(viewModel.weather == nil ? 0 : 1)
                         .matchedGeometryEffect(id: "StatusText", in: animation)
                 }
-                RoundedRectangleView(weather: viewModel.weather, isExpanded: $viewModel.isExpanded, buttonTapped: toggleIsExpanded)
+                RoundedRectangleView(viewModel: RoundedRectangleViewModel(weather: viewModel.weather), isExpanded: $viewModel.isExpanded, buttonTapped: toggleIsExpanded)
                     .frame(maxWidth: 640)
                     .onTapGesture {
                         toggleIsExpanded()
