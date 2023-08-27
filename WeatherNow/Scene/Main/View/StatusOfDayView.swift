@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StatusOfDayAndDateView: View {
+struct StatusOfDayView: View {
     let status: String
     let date: String
     @Binding var isExpanded: Bool
@@ -50,6 +50,6 @@ struct StatusOfDayAndDateView: View {
 
 struct StatusOfDayAndDateView_Previews: PreviewProvider {
     static var previews: some View {
-        StatusOfDayAndDateView(status: "It's raining", date: "June", isExpanded: .constant(false))
+        StatusOfDayView(status: "It's raining", date: "June", isExpanded: .constant(false))
     }
 }
