@@ -35,3 +35,8 @@ enum UnitOfValue {
         }
     }
 }
+
+enum DateFormat {
+    case hour
+    case weekDayMonth
+}
