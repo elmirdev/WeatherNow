@@ -10,7 +10,8 @@ import SwiftUI
 
 struct HourlyTemperatureView: View {
     @ObservedObject var viewModel: HourlyTemperatureViewModel
-    
+    @State private var animatableValue: CGFloat = 0
+
     var body: some View {
         VStack(spacing: 8) {
             Text(viewModel.hourText)
@@ -21,11 +22,11 @@ struct HourlyTemperatureView: View {
                 .scaledToFit()
                 .frame(width: 28, height: 28)
                 .padding(2)
-            TextAnimatableValue(value: viewModel.animatableValue, valueType: .temperature)
+            TextAnimatableValue(value: animatableValue, valueType: .temperature)
                 .font(.system(size: 16, weight: .semibold))
         }.onAppear {
             withAnimation(.easeInOut(duration: 2)) {
-                viewModel.animatableValue = viewModel.tempC
+                animatableValue = viewModel.tempC
             }
         }
     }

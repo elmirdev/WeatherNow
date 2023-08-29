@@ -12,7 +12,7 @@ struct IconWithTextView: View {
     @Binding var isExpanded: Bool
     @Namespace private var animation
     
-    @State var animatableValue: CGFloat = 0
+    @State private var animatableValue: CGFloat = 0
     
     var body: some View {
         ZStack(alignment: .leading) {
