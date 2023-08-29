@@ -9,8 +9,7 @@ import Foundation
 
 class HourlyTemperatureViewModel: ObservableObject {
     let hour: Hour
-    @Published var animatableValue: CGFloat = 0
-
+    
     init(hour: Hour) {
         self.hour = hour
     }

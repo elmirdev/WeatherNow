@@ -12,6 +12,8 @@ struct IconWithTextView: View {
     @Binding var isExpanded: Bool
     @Namespace private var animation
     
+    @State private var animatableValue: CGFloat = 0
+    
     var body: some View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 18)
@@ -36,7 +38,7 @@ struct IconWithTextView: View {
                                 .foregroundColor(.gray)
                                 .fixedSize()
                                 .matchedGeometryEffect(id: "TitleText", in: animation)
-                            TextAnimatableValue(value: viewModel.animatableValue, valueType: viewModel.valueType)
+                            TextAnimatableValue(value: animatableValue, valueType: viewModel.valueType)
                                 .font(.system(size: 14, weight: .bold))
                                 .fixedSize()
                                 .matchedGeometryEffect(id: "ValueText", in: animation)
@@ -51,7 +53,7 @@ struct IconWithTextView: View {
                             .foregroundColor(.gray)
                             .fixedSize()
                             .matchedGeometryEffect(id: "TitleText", in: animation)
-                        TextAnimatableValue(value: viewModel.animatableValue, valueType: viewModel.valueType)
+                        TextAnimatableValue(value: animatableValue, valueType: viewModel.valueType)
                             .font(.system(size: 14, weight: .bold))
                             .fixedSize()
                             .matchedGeometryEffect(id: "ValueText", in: animation)
@@ -61,7 +63,7 @@ struct IconWithTextView: View {
             .padding(.horizontal, 12)
             .onAppear {
                 withAnimation(.easeInOut(duration: 2)) {
-                    viewModel.animatableValue = viewModel.value
+                    animatableValue = viewModel.value
                 }
             }
         }

@@ -11,8 +11,6 @@ class IconWithTextViewModel: ObservableObject {
     let value: CGFloat
     let valueType: ValueType
     
-    @Published var animatableValue: CGFloat = 0
-
     init(value: CGFloat, valueType: ValueType) {
         self.value = value
         self.valueType = valueType
