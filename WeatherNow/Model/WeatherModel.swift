@@ -52,6 +52,12 @@ struct Condition: Codable {
     let code: Int
 }
 
+extension Condition {
+    func getPeriodOfDay() -> PeriodOfDay {
+        return icon.contains("day") ? .day : .night
+    }
+}
+
 // MARK: - Location
 struct Location: Codable {
     let name, region, country: String
