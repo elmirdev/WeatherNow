@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RoundedRectangleView: View {
     
-    let weather: WeatherDTO?
+    let weather: WeatherEntity?
     @Binding var isExpanded: Bool
     
     @State var colors: [Color] = [.blue, .gray.opacity(0.5), .gray.opacity(0.5)]
@@ -37,9 +37,9 @@ struct RoundedRectangleView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 12) {
                     if let weather {
-                        SmallIconWithTextCell(value: weather.current.feelslikeC, valueType: .temperature, isExpanded: $isExpanded)
-                        SmallIconWithTextCell(value: weather.current.precipIn, valueType: .precipitation, isExpanded: $isExpanded)
-                        SmallIconWithTextCell(value: weather.current.uv, valueType: .uv, isExpanded: $isExpanded)
+                        SmallIconWithTextCell(value: weather.currentWeather.feelslikeC, valueType: .temperature, isExpanded: $isExpanded)
+                        SmallIconWithTextCell(value: weather.currentWeather.precipIn, valueType: .precipitation, isExpanded: $isExpanded)
+                        SmallIconWithTextCell(value: weather.currentWeather.uv, valueType: .uv, isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     } else {
@@ -53,9 +53,9 @@ struct RoundedRectangleView: View {
                 Spacer(minLength: 12)
                 VStack(alignment: .leading, spacing: 12) {
                     if let weather {
-                        SmallIconWithTextCell(value: weather.current.windKph, valueType: .wind, isExpanded: $isExpanded)
-                        SmallIconWithTextCell(value: CGFloat(weather.current.humidity), valueType: .humidity, isExpanded: $isExpanded)
-                        SmallIconWithTextCell(value: weather.current.pressureMB, valueType: .pressure, isExpanded: $isExpanded)
+                        SmallIconWithTextCell(value: weather.currentWeather.windKph, valueType: .wind, isExpanded: $isExpanded)
+                        SmallIconWithTextCell(value: CGFloat(weather.currentWeather.humidity), valueType: .humidity, isExpanded: $isExpanded)
+                        SmallIconWithTextCell(value: weather.currentWeather.pressureMB, valueType: .pressure, isExpanded: $isExpanded)
                             .frame(height: isExpanded ? .none : .zero)
                             .opacity(isExpanded ? 1 : 0)
                     } else {
@@ -71,7 +71,7 @@ struct RoundedRectangleView: View {
             Divider()
                 .padding(.horizontal)
             
-            if let days = weather?.forecast.forecastday {
+            if let days = weather?.forecast {
                 HStack {
                     ForEach(days.indices, id: \.self) { index in
                         let day = getDayAndMonth(dateString: days[index].date).0
@@ -105,7 +105,7 @@ struct RoundedRectangleView: View {
             }
             
             ScrollView(.horizontal, showsIndicators: false) {
-                if let hours = weather?.forecast.forecastday[selectedDay].hour {
+                if let hours = weather?.forecast[selectedDay].hour {
                     HStack(spacing: 32) {
                         ForEach(hours.indices, id: \.self) { index in
                             HourlyTempView(hour: hours[index])
@@ -114,7 +114,7 @@ struct RoundedRectangleView: View {
                     .padding(.vertical, 8)
                     .padding(.horizontal, 28)
                 } else {
-                    HourlyTempView(hour: HourDTO(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: ConditionDTO(text: "", icon: "night", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0))
+                    HourlyTempView(hour: .init(time: "", tempC: 0, condition: .init(text: "", icon: "", code: 0)))
                         .padding(.vertical, 8)
                         .padding(.horizontal, 28)
                 }
@@ -147,6 +147,6 @@ struct RoundedRectangleView: View {
 
 struct RoundedRectangleView_Previews: PreviewProvider {
     static var previews: some View {
-        RoundedRectangleView(weather: WeatherDTO(location: LocationDTO(name: "Baku", region: "Baku", country: "Azerbaijan", lat: 40, lon: 39, tzID: "", localtimeEpoch: 0, localtime: ""), current: CurrentDTO(tempC: 24, tempF: 23, isDay: 0, condition: ConditionDTO(text: "Sunny", icon: "day", code: 1000), windMph: 19, windKph: 19, pressureMB: 19, pressureIn: 19, precipMm: 19, precipIn: 19, humidity: 12, cloud: 1, feelslikeC: 24, feelslikeF: 45, uv: 1), forecast: ForecastDTO(forecastday: [ForecastdayDTO(date: "2023-08-07 00:00", day: DayDTO(condition: ConditionDTO(text: "Sunny", icon: "day", code: 1000)), astro: AstroDTO(sunrise: "", sunset: "", moonrise: "", moonset: ""), hour: [HourDTO(time: "", tempC: 24, tempF: 45, isDay: 0, condition: ConditionDTO(text: "", icon: "day", code: 1000), windMph: 12, windKph: 12, precipMm: 12, precipIn: 12, humidity: 12, cloud: 12, feelslikeC: 11, feelslikeF: 12)])])), isExpanded: .constant(true), handleButton: MainView().toggleIsExpanded)
+        RoundedRectangleView(weather: .mock, isExpanded: .constant(true), handleButton: MainView().toggleIsExpanded)
     }
 }

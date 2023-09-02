@@ -52,9 +52,9 @@ struct MainView: View {
                         toggleIsExpanded()
                     }
             }
-            .onChange(of: viewModel.weather?.current.tempC) { newValue in
+            .onChange(of: viewModel.weather?.currentWeather.tempC) { newValue in
                 withAnimation(.easeInOut(duration: 1.5)) {
-                    viewModel.tempC = viewModel.weather?.current.tempC ?? 0
+                    viewModel.tempC = viewModel.weather?.currentWeather.tempC ?? 0
                     viewModel.imageOffset = .zero
                 }
                 withAnimation(.easeInOut(duration: 2)) {
