@@ -22,18 +22,8 @@ struct MainView: View {
             bgColor
                 .ignoresSafeArea()
             VStack(spacing: 0) {
-                HStack(alignment: .center, spacing: 2) {
-                    Image("location")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 24, height: 24)
-                    Text(viewModel.cityName)
-                        .font(.system(size: 20))
-                        .foregroundColor(.white)
-                        .fontWeight(.semibold)
-                }
+                locationIconCityName
                 .padding(.bottom)
-                
                     Spacer()
                 HStack {
                     ZStack(alignment: .topTrailing) {
@@ -122,6 +112,23 @@ extension MainView {
                         }
                     })
             )
+    }
+}
+
+// MARK: - Location icon and city name
+extension MainView {
+    @ViewBuilder
+    var locationIconCityName: some View {
+        HStack(alignment: .center, spacing: 2) {
+            Image("location")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 24, height: 24)
+            Text(viewModel.cityName)
+                .font(.system(size: 20))
+                .foregroundColor(.white)
+                .fontWeight(.semibold)
+        }
     }
 }
 
