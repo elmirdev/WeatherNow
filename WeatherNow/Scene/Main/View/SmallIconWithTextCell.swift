@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct SmallIconWithTextCell: View {
-    let imageText: String
-    let title: String
     let value: CGFloat
-    let unit: String
+    let valueType: ValueType
     @State private var animatableValue: CGFloat = 0
     @Binding var isExpanded: Bool
     @Namespace private var animation
@@ -23,7 +21,7 @@ struct SmallIconWithTextCell: View {
                 .frame(height: isExpanded ? 96 : 48)
             HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 16) {
-                    Image(imageText)
+                    Image(valueType.imageText)
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 24, maxHeight: 24)
@@ -34,13 +32,13 @@ struct SmallIconWithTextCell: View {
                         }
                     if isExpanded {
                         VStack(alignment: .leading) {
-                            Text(title)
+                            Text(valueType.title)
                                 .font(.system(size: 14))
                                 .fontWeight(.medium)
                                 .foregroundColor(.gray)
                                 .fixedSize()
                                 .matchedGeometryEffect(id: "TitleText", in: animation)
-                            TextAnimatableValue(value: animatableValue, unit: unit)
+                            TextAnimatableValue(value: animatableValue, unit: valueType.unit)
                                 .font(.system(size: 14, weight: .bold))
                                 .fixedSize()
                                 .matchedGeometryEffect(id: "ValueText", in: animation)
@@ -49,13 +47,13 @@ struct SmallIconWithTextCell: View {
                 }
                 if !isExpanded {
                     VStack(alignment: .leading) {
-                        Text(title)
+                        Text(valueType.title)
                             .font(.system(size: 14))
                             .fontWeight(.medium)
                             .foregroundColor(.gray)
                             .fixedSize()
                             .matchedGeometryEffect(id: "TitleText", in: animation)
-                        TextAnimatableValue(value: animatableValue, unit: unit)
+                        TextAnimatableValue(value: animatableValue, unit: valueType.unit)
                             .font(.system(size: 14, weight: .bold))
                             .fixedSize()
                             .matchedGeometryEffect(id: "ValueText", in: animation)
@@ -74,6 +72,6 @@ struct SmallIconWithTextCell: View {
 
 struct SmallIconWithText_Previews: PreviewProvider {
     static var previews: some View {
-        SmallIconWithTextCell(imageText: "temperature", title: "Precipitation", value: 16, unit: "°", isExpanded: .constant(true))
+        SmallIconWithTextCell(value: 16, valueType: .temperature, isExpanded: .constant(true))
     }
 }

@@ -17,6 +17,67 @@ enum PeriodOfDay {
     case night
 }
 
+enum ValueType {
+    case temperature
+    case precipitation
+    case uv
+    case wind
+    case humidity
+    case pressure
+    
+    var unit: String {
+        switch self {
+        case .temperature:
+            return "°"
+        case .precipitation:
+            return "%"
+        case .uv:
+            return ""
+        case .wind:
+            return " km/h"
+        case .humidity:
+            return "%"
+        case .pressure:
+            return " hPa"
+        }
+    }
+    
+    var imageText: String {
+        switch self {
+        case .temperature:
+            return "temperature"
+        case .precipitation:
+            return "precipitation"
+        case .uv:
+            return "1000d"
+        case .wind:
+            return "wind"
+        case .humidity:
+            return "humidity"
+        case .pressure:
+            return "pressure"
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .temperature:
+            return "Feels Like"
+        case .precipitation:
+            return "Precipitation"
+        case .uv:
+            return "UV Index"
+        case .wind:
+            return "Wind Speed"
+        case .humidity:
+            return "Humidity"
+        case .pressure:
+            return "Pressure"
+        }
+    }
+}
+
+
 class Helpers {
     static let shared = Helpers()
     
