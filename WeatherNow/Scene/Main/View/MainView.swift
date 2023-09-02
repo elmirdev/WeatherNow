@@ -8,18 +8,12 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var bgColor = Color.black
-    @State private var tempC: CGFloat = 0
-    @State private var imageOffset = CGSize(width: 0, height: UIScreen.main.bounds.height)
-    @State private var isExpanded = false
-    
     @ObservedObject private var viewModel = MainViewModel()
-    
     @Namespace private var animation
     
     var body: some View {
         ZStack {
-            bgColor
+            viewModel.bgColor
                 .ignoresSafeArea()
             VStack(spacing: 0) {
                 locationIconCityName
@@ -29,8 +23,8 @@ struct MainView: View {
                     ZStack(alignment: .topTrailing) {
                         weatherIcon
                         
-                        if !isExpanded {
-                            TextAnimatableValue(value: tempC, unit: "°")
+                        if !viewModel.isExpanded {
+                            TextAnimatableValue(value: viewModel.tempC, unit: "°")
                                 .fixedSize()
                                 .foregroundColor(.white)
                                 .font(.system(size: 88, weight: .heavy))
@@ -38,8 +32,8 @@ struct MainView: View {
                                 .matchedGeometryEffect(id: "DegreText", in: animation)
                         }
                     }
-                    if isExpanded {
-                        TextAnimatableValue(value: tempC, unit: "°")
+                    if viewModel.isExpanded {
+                        TextAnimatableValue(value: viewModel.tempC, unit: "°")
                             .fixedSize()
                             .foregroundColor(.white)
                             .font(.system(size: 44, weight: .heavy))
@@ -49,10 +43,10 @@ struct MainView: View {
                     }
                 }
                 Spacer()
-                if !isExpanded {
+                if !viewModel.isExpanded {
                     statusOfDayAndDateView
                 }
-                RoundedRectangleView(weather: viewModel.weather, isExpanded: $isExpanded, handleButton: toggleIsExpanded)
+                RoundedRectangleView(weather: viewModel.weather, isExpanded: $viewModel.isExpanded, handleButton: toggleIsExpanded)
                     .frame(maxWidth: 640)
                     .onTapGesture {
                         toggleIsExpanded()
@@ -60,11 +54,11 @@ struct MainView: View {
             }
             .onChange(of: viewModel.weather?.current.tempC) { newValue in
                 withAnimation(.easeInOut(duration: 1.5)) {
-                    self.tempC = viewModel.weather?.current.tempC ?? 0
-                    imageOffset = .zero
+                    viewModel.tempC = viewModel.weather?.current.tempC ?? 0
+                    viewModel.imageOffset = .zero
                 }
                 withAnimation(.easeInOut(duration: 2)) {
-                    bgColor = viewModel.bgColor
+                    viewModel.bgColor = viewModel.bgColorFromData
                 }
             }
         }
@@ -72,7 +66,7 @@ struct MainView: View {
     
     func toggleIsExpanded() {
         withAnimation(.spring()) {
-            isExpanded.toggle()
+            viewModel.isExpanded.toggle()
         }
     }
 }
@@ -90,25 +84,25 @@ extension MainView {
         Image(viewModel.imageName)
             .resizable()
             .scaledToFit()
-            .padding(isExpanded ? 0 : 16)
-            .frame(maxWidth: isExpanded ? 180 : 320,maxHeight: isExpanded ? 180 : 320)
-            .offset(x: imageOffset.width, y: imageOffset.height)
+            .padding(viewModel.isExpanded ? 0 : 16)
+            .frame(maxWidth: viewModel.isExpanded ? 180 : 320,maxHeight: viewModel.isExpanded ? 180 : 320)
+            .offset(x: viewModel.imageOffset.width, y: viewModel.imageOffset.height)
             .onTapGesture {
                 withAnimation(.spring()) {
-                    isExpanded.toggle()
+                    viewModel.isExpanded.toggle()
                 }
             }
             .gesture(
                 DragGesture()
                     .onChanged({ gesture in
                         withAnimation(.easeInOut(duration: 0.5)) {
-                            self.imageOffset.height = gesture.translation.height
-                            self.imageOffset.width = gesture.translation.width
+                            viewModel.imageOffset.height = gesture.translation.height
+                            viewModel.imageOffset.width = gesture.translation.width
                         }
                     })
                     .onEnded({ _ in
                         withAnimation(.easeOut(duration: 0.75)) {
-                            self.imageOffset = .zero
+                            viewModel.imageOffset = .zero
                         }
                     })
             )
@@ -136,7 +130,7 @@ extension MainView {
 extension MainView {
     @ViewBuilder
     var statusOfDayAndDateView: some View {
-        VStack(alignment: isExpanded ? .leading : .center, spacing: 8) {
+        VStack(alignment: viewModel.isExpanded ? .leading : .center, spacing: 8) {
             Text(viewModel.conditionText)
                 .foregroundColor(.white)
                 .fontWeight(.semibold)

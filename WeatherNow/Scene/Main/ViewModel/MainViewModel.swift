@@ -17,6 +17,11 @@ enum PeriodOfDay {
 class MainViewModel: NSObject, ObservableObject {
 
     @Published var weather: WeatherModel?
+    @Published var bgColor = Color.black
+    @Published var tempC: CGFloat = 0
+    @Published var imageOffset = CGSize(width: 0, height: UIScreen.main.bounds.height)
+    @Published var isExpanded = false
+
     private let locationManager = CLLocationManager()
         
         override init() {
@@ -54,7 +59,7 @@ class MainViewModel: NSObject, ObservableObject {
         return .day
     }
     
-    var bgColor: Color {
+    var bgColorFromData: Color {
         guard let code = weather?.current.condition.code else { return .black }
         let colorName = getImageName(code: code, periodOfDay: periodOfHour)
         return Color(colorName)
