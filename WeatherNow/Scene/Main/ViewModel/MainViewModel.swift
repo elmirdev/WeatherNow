@@ -11,7 +11,7 @@ import CoreLocation
 
 class MainViewModel: NSObject, ObservableObject {
 
-    @Published var weather: WeatherDTO?
+    @Published var weather: WeatherEntity?
     @Published var bgColor = Color.black
     @Published var tempC: CGFloat = 0
     @Published var imageOffset = CGSize(width: 0, height: UIScreen.main.bounds.height)
@@ -32,17 +32,17 @@ class MainViewModel: NSObject, ObservableObject {
         }
     }
     
-    private func getDataFromLocal() {
-        if let path = Bundle.main.path(forResource: "getWeatherResponse", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let weather = try JSONDecoder().decode(WeatherDTO.self, from: data)
-                self.weather = weather
-            } catch {
-                print("DEBUG: Error \(error)")
-            }
-        }
-    }
+//    private func getDataFromLocal() {
+//        if let path = Bundle.main.path(forResource: "getWeatherResponse", ofType: "json") {
+//            do {
+//                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+//                let weather = try JSONDecoder().decode(WeatherDTO.self, from: data)
+//                self.weather = weather
+//            } catch {
+//                print("DEBUG: Error \(error)")
+//            }
+//        }
+//    }
         
     var bgColorFromData: Color {
         guard let weather else { return .black }

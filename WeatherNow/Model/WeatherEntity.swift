@@ -20,7 +20,7 @@ struct WeatherEntity {
 }
 
 extension WeatherEntity {
-    static let mock = WeatherEntity(location: .init(name: "", region: "", country: "", localtime: ""), currentWeather: .init(temp: 0, condition: .init(text: "", icon: "", code: 0), windSpeed: 0.0, pressure: 0.0, precipitation: 0.0, humidity: 0, feelsLike: 0.0, uv: 0.0), forecast: [.init(date: "", condition: .init(text: "", icon: "", code: 0), hour: [.init(time: "", temp: 0.0, icon: "", code: 0)])])
+    static let mock = WeatherEntity(location: .init(name: "", region: "", country: "", localtime: ""), currentWeather: .init(temp: 0, condition: .init(text: "", icon: "", code: 0), windSpeed: 0.0, pressure: 0.0, precipitation: 0.0, humidity: 0, feelsLike: 0.0, uv: 0.0), forecast: [.init(date: "", condition: .init(text: "", icon: "", code: 0), hour: [.init(time: "", condition: .init(text: "", icon: "", code: 0))])])
 }
 
 struct LocationEntity {
@@ -59,9 +59,7 @@ struct ForecastDayEntity {
 
 struct HourEntity {
     let time: String
-    let temp: CGFloat
-    let icon: String
-    let code: Int
+    let condition: ConditionEntity
 }
 
 // MARK: - Extensions
@@ -97,6 +95,6 @@ extension ForecastDayEntity {
 
 extension HourEntity {
     init(from data: HourDTO) {
-        self.init(time: data.time, temp: data.tempC, icon: data.condition.icon, code: data.condition.code)
+        self.init(time: data.time, condition: ConditionEntity(from: data.condition))
     }
 }

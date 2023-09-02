@@ -115,12 +115,12 @@ class Helpers {
         }
     }
     
-    func getImageName(weather: WeatherDTO? = nil, hour: HourDTO? = nil) -> String {
+    func getImageName(weather: WeatherEntity? = nil, hour: HourEntity? = nil) -> String {
         var code = 1000
         var periodOfDay: PeriodOfDay = .day
         if let weather {
-            code = weather.current.condition.code
-            periodOfDay = weather.current.condition.getPeriodOfDay()
+            code = weather.currentWeather.condition.code
+            periodOfDay = weather.currentWeather.condition.getPeriodOfDay()
         }
         if let hour {
             code = hour.condition.code
