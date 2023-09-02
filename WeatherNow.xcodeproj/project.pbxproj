@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EF11CD802A2F5A0600C04E33 /* RoundedRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF11CD7F2A2F5A0600C04E33 /* RoundedRectangleView.swift */; };
 		EF11CD822A2F5F5100C04E33 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF11CD812A2F5F5100C04E33 /* MainViewModel.swift */; };
+		EF31088C2AA39FC10033EDC2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF31088B2AA39FC10033EDC2 /* Helpers.swift */; };
 		EF4ACEAA2A2E993700D7BB14 /* HourlyTempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4ACEA92A2E993700D7BB14 /* HourlyTempView.swift */; };
 		EF4ACEB02A2E99AF00D7BB14 /* SmallIconWithTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4ACEAF2A2E99AF00D7BB14 /* SmallIconWithTextCell.swift */; };
 		EFA435022A2AADA2006420A9 /* WeatherNowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA435012A2AADA2006420A9 /* WeatherNowApp.swift */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		EF11CD7F2A2F5A0600C04E33 /* RoundedRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleView.swift; sourceTree = "<group>"; };
 		EF11CD812A2F5F5100C04E33 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		EF31088B2AA39FC10033EDC2 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		EF4ACEA92A2E993700D7BB14 /* HourlyTempView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyTempView.swift; sourceTree = "<group>"; };
 		EF4ACEAF2A2E99AF00D7BB14 /* SmallIconWithTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallIconWithTextCell.swift; sourceTree = "<group>"; };
 		EF83FA882A3718770008EE8E /* WeatherNow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherNow.entitlements; sourceTree = "<group>"; };
@@ -54,6 +56,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF31088A2AA39FAA0033EDC2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				EF31088B2AA39FC10033EDC2 /* Helpers.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		EF8657BB2A2E93F0003284BA /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +138,7 @@
 		EFA435002A2AADA2006420A9 /* WeatherNow */ = {
 			isa = PBXGroup;
 			children = (
+				EF31088A2AA39FAA0033EDC2 /* Utils */,
 				EF83FA882A3718770008EE8E /* WeatherNow.entitlements */,
 				EF8657BC2A2E9401003284BA /* Network */,
 				EF8657BB2A2E93F0003284BA /* Model */,
@@ -231,6 +242,7 @@
 				EFC132752A4462520075E772 /* ForecastModel.swift in Sources */,
 				EFA49C9D2A2E0E65006CCA16 /* WeatherModel.swift in Sources */,
 				EFA435022A2AADA2006420A9 /* WeatherNowApp.swift in Sources */,
+				EF31088C2AA39FC10033EDC2 /* Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

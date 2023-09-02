@@ -16,16 +16,14 @@ struct HourlyTempView: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            Text(getHour(dateString: hour.time))
+            Text(Helpers.shared.getDate(dateString: hour.time, dateType: .hour))
                 .font(.system(size: 14))
                 .foregroundColor(.gray)
-            if let periodOfHour {
-                Image(mainViewModel.getImageName(code: hour.condition.code, periodOfDay: periodOfHour))
+                Image(Helpers.shared.getImageName(hour: hour))
                     .resizable()
                     .scaledToFit()
                     .frame(width: 28, height: 28)
                     .padding(2)
-            }
             TextAnimatableValue(value: animatableValue, unit: "°")
                 .font(.system(size: 16, weight: .semibold))
         }.onAppear {
@@ -38,28 +36,6 @@ struct HourlyTempView: View {
                 self.animatableValue = newValue
             }
         }
-    }
-    
-    func getHour(dateString: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-
-        if let date = dateFormatter.date(from: dateString) {
-            let calendar = Calendar.current
-            let hour = calendar.component(.hour, from: date)
-            return "\(hour):00"
-        } else {
-            return "-"
-        }
-    }
-    
-    var periodOfHour: PeriodOfDay? {
-        if hour.condition.icon.contains("day") {
-            return .day
-        } else if hour.condition.icon.contains("night") {
-            return .night
-        }
-        return nil
     }
 }
 

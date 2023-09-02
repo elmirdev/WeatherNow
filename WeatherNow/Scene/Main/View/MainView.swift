@@ -134,7 +134,7 @@ extension MainView {
             Text(viewModel.conditionText)
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
-            Text(viewModel.getHour(dateString: viewModel.localtimeText))
+            Text(Helpers.shared.getDate(dateString: viewModel.localtimeText, dateType: .weekDayMonth))
                 .foregroundColor(.white)
         }
         .fixedSize()
