@@ -37,31 +37,7 @@ struct MainView: View {
                     Spacer()
                 HStack {
                     ZStack(alignment: .topTrailing) {
-                        Image(viewModel.imageName)
-                            .resizable()
-                            .scaledToFit()
-                            .padding(isExpanded ? 0 : 16)
-                            .frame(maxWidth: isExpanded ? 180 : 320,maxHeight: isExpanded ? 180 : 320)
-                            .offset(x: imageOffset.width, y: imageOffset.height)
-                            .onTapGesture {
-                                withAnimation(.spring()) {
-                                    isExpanded.toggle()
-                                }
-                            }
-                            .gesture(
-                                DragGesture()
-                                    .onChanged({ gesture in
-                                        withAnimation(.easeInOut(duration: 0.5)) {
-                                            self.imageOffset.height = gesture.translation.height
-                                            self.imageOffset.width = gesture.translation.width
-                                        }
-                                    })
-                                    .onEnded({ _ in
-                                        withAnimation(.easeOut(duration: 0.75)) {
-                                            self.imageOffset = .zero
-                                        }
-                                    })
-                            )
+                        weatherIcon
                         
                         if !isExpanded {
                             TextAnimatableValue(value: tempC, unit: "°")
@@ -117,6 +93,39 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - WeatherIcon
+extension MainView {
+    @ViewBuilder
+    var weatherIcon: some View {
+        Image(viewModel.imageName)
+            .resizable()
+            .scaledToFit()
+            .padding(isExpanded ? 0 : 16)
+            .frame(maxWidth: isExpanded ? 180 : 320,maxHeight: isExpanded ? 180 : 320)
+            .offset(x: imageOffset.width, y: imageOffset.height)
+            .onTapGesture {
+                withAnimation(.spring()) {
+                    isExpanded.toggle()
+                }
+            }
+            .gesture(
+                DragGesture()
+                    .onChanged({ gesture in
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            self.imageOffset.height = gesture.translation.height
+                            self.imageOffset.width = gesture.translation.width
+                        }
+                    })
+                    .onEnded({ _ in
+                        withAnimation(.easeOut(duration: 0.75)) {
+                            self.imageOffset = .zero
+                        }
+                    })
+            )
+    }
+}
+
+// MARK: - StatusOfDayAndDateView
 extension MainView {
     @ViewBuilder
     var statusOfDayAndDateView: some View {
