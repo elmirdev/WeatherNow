@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct HourlyTempView: View {
-    let hour: Hour
+    let hour: HourDTO
     let mainViewModel = MainViewModel()
     
     @State private var animatableValue: CGFloat = 0
@@ -41,6 +41,6 @@ struct HourlyTempView: View {
 
 struct HourlyDegreeCell_Previews: PreviewProvider {
     static var previews: some View {
-        HourlyTempView(hour: Hour(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: Condition(text: "", icon: "day", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0))
+        HourlyTempView(hour: HourDTO(time: "2023-08-07 00:00", tempC: 0, tempF: 0, isDay: 0, condition: ConditionDTO(text: "", icon: "day", code: 1000), windMph: 0, windKph: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0))
     }
 }

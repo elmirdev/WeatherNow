@@ -8,16 +8,16 @@
 import Foundation
 
 // MARK: - Forecast
-struct ForecastModel: Codable {
-    let forecastday: [Forecastday]
+struct ForecastDTO: Codable {
+    let forecastday: [ForecastdayDTO]
 }
 
 // MARK: - Forecastday
-struct Forecastday: Codable {
+struct ForecastdayDTO: Codable {
     let date: String
-    let day: Day
-    let astro: Astro
-    let hour: [Hour]
+    let day: DayDTO
+    let astro: AstroDTO
+    let hour: [HourDTO]
 
     enum CodingKeys: String, CodingKey {
         case date, day, astro, hour
@@ -25,7 +25,7 @@ struct Forecastday: Codable {
 }
 
 // MARK: - Astro
-struct Astro: Codable {
+struct AstroDTO: Codable {
     let sunrise, sunset, moonrise, moonset: String
 
     enum CodingKeys: String, CodingKey {
@@ -34,8 +34,8 @@ struct Astro: Codable {
 }
 
 // MARK: - Day
-struct Day: Codable {
-    let condition: Condition
+struct DayDTO: Codable {
+    let condition: ConditionDTO
 
     enum CodingKeys: String, CodingKey {
         case condition
@@ -43,11 +43,11 @@ struct Day: Codable {
 }
 
 // MARK: - Hour
-struct Hour: Codable {
+struct HourDTO: Codable {
     let time: String
     let tempC, tempF: CGFloat
     let isDay: Int
-    let condition: Condition
+    let condition: ConditionDTO
     let windMph, windKph: Double
     let precipMm, precipIn: Double
     let humidity, cloud: Int

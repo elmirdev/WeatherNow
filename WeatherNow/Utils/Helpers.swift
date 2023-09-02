@@ -115,7 +115,7 @@ class Helpers {
         }
     }
     
-    func getImageName(weather: WeatherModel? = nil, hour: Hour? = nil) -> String {
+    func getImageName(weather: WeatherDTO? = nil, hour: HourDTO? = nil) -> String {
         var code = 1000
         var periodOfDay: PeriodOfDay = .day
         if let weather {

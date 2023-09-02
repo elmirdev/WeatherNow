@@ -8,18 +8,18 @@
 import Foundation
 
 // MARK: - WeatherModel
-struct WeatherModel: Codable {
-    let location: Location
-    let current: Current
-    let forecast: ForecastModel
+struct WeatherDTO: Codable {
+    let location: LocationDTO
+    let current: CurrentDTO
+    let forecast: ForecastDTO
 }
 
 // MARK: - Current
-struct Current: Codable {
+struct CurrentDTO: Codable {
     let tempC: CGFloat
     let tempF: CGFloat
     let isDay: Int
-    let condition: Condition
+    let condition: ConditionDTO
     let windMph, windKph: Double
     let pressureMB: CGFloat
     let pressureIn: CGFloat
@@ -47,19 +47,19 @@ struct Current: Codable {
 }
 
 // MARK: - Condition
-struct Condition: Codable {
+struct ConditionDTO: Codable {
     let text, icon: String
     let code: Int
 }
 
-extension Condition {
+extension ConditionDTO {
     func getPeriodOfDay() -> PeriodOfDay {
         return icon.contains("day") ? .day : .night
     }
 }
 
 // MARK: - Location
-struct Location: Codable {
+struct LocationDTO: Codable {
     let name, region, country: String
     let lat, lon: CGFloat
     let tzID: String
