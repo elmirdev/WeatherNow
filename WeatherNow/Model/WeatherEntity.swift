@@ -19,6 +19,10 @@ struct WeatherEntity {
     }
 }
 
+extension WeatherEntity {
+    static let mock = WeatherEntity(location: .init(name: "", region: "", country: "", localtime: ""), currentWeather: .init(temp: 0, condition: .init(text: "", icon: "", code: 0), windSpeed: 0.0, pressure: 0.0, precipitation: 0.0, humidity: 0, feelsLike: 0.0, uv: 0.0), forecast: [.init(date: "", condition: .init(text: "", icon: "", code: 0), hour: [.init(time: "", temp: 0.0, icon: "")])])
+}
+
 struct LocationEntity {
     let name, region, country: String
     let localtime: String
