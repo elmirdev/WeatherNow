@@ -122,6 +122,31 @@ class MainViewModel: NSObject, ObservableObject {
         }
     }
     
+    func getHour(dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+
+        if let date = dateFormatter.date(from: dateString) {
+            let calendar = Calendar.current
+            
+            // MARK: Week Day
+            let weekFormatter = DateFormatter()
+            weekFormatter.dateFormat = "EEE"
+            let weekDay = weekFormatter.string(from: date)
+            
+            // MARK: Day
+            let day = calendar.component(.day, from: date)
+            
+            // MARK: Month Name
+            let monthFormatter = DateFormatter()
+            monthFormatter.dateFormat = "MMM"
+            let monthName = monthFormatter.string(from: date)
+            return "\(weekDay) \(day) \(monthName)"
+        } else {
+            return "Loading..."
+        }
+    }
+    
     private func fetchUserLocation() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()

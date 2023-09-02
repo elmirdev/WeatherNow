@@ -79,19 +79,12 @@ struct MainView: View {
                             .font(.system(size: 44, weight: .heavy))
                             .matchedGeometryEffect(id: "DegreText", in: animation)
                         
-                        StatusOfDayAndDateView(status: viewModel.conditionText, date: viewModel.localtimeText, isExpanded: $isExpanded)
-                            .fixedSize()
-                            .opacity(viewModel.weather == nil ? 0 : 1)
-                            .padding(.horizontal)
-                            .matchedGeometryEffect(id: "StatusText", in: animation)
+                        statusOfDayAndDateView
                     }
                 }
                 Spacer()
                 if !isExpanded {
-                    StatusOfDayAndDateView(status: viewModel.conditionText, date: viewModel.localtimeText, isExpanded: $isExpanded)
-                        .fixedSize()
-                        .opacity(viewModel.weather == nil ? 0 : 1)
-                        .matchedGeometryEffect(id: "StatusText", in: animation)
+                    statusOfDayAndDateView
                 }
                 RoundedRectangleView(weather: viewModel.weather, isExpanded: $isExpanded, handleButton: toggleIsExpanded)
                     .frame(maxWidth: 640)
@@ -121,5 +114,22 @@ struct MainView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
+    }
+}
+
+extension MainView {
+    @ViewBuilder
+    var statusOfDayAndDateView: some View {
+        VStack(alignment: isExpanded ? .leading : .center, spacing: 8) {
+            Text(viewModel.conditionText)
+                .foregroundColor(.white)
+                .fontWeight(.semibold)
+            Text(viewModel.getHour(dateString: viewModel.localtimeText))
+                .foregroundColor(.white)
+        }
+        .fixedSize()
+        .opacity(viewModel.weather == nil ? 0 : 1)
+        .padding(.horizontal)
+        .matchedGeometryEffect(id: "StatusText", in: animation)
     }
 }
