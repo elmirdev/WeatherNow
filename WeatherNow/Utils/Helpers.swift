@@ -96,7 +96,7 @@ class Helpers {
             // MARK: Day
             let day = calendar.component(.day, from: date)
             
-            //MARK: - Hour
+            //MARK: Hour
             let hour = calendar.component(.hour, from: date)
             
             // MARK: Month Name
