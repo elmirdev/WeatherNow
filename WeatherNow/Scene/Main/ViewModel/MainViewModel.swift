@@ -66,7 +66,7 @@ class MainViewModel: NSObject, ObservableObject {
     }
     
     var conditionText: String {
-        return weather?.current.condition.text ?? "Loading..."
+        return weather?.currentWeather.condition.text ?? "Loading..."
     }
     
     var localtimeText: String {

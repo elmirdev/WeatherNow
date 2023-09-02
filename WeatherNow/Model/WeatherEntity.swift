@@ -20,7 +20,7 @@ struct WeatherEntity {
 }
 
 extension WeatherEntity {
-    static let mock = WeatherEntity(location: .init(name: "", region: "", country: "", localtime: ""), currentWeather: .init(temp: 0, condition: .init(text: "", icon: "", code: 0), windSpeed: 0.0, pressure: 0.0, precipitation: 0.0, humidity: 0, feelsLike: 0.0, uv: 0.0), forecast: [.init(date: "", condition: .init(text: "", icon: "", code: 0), hour: [.init(time: "", condition: .init(text: "", icon: "", code: 0))])])
+    static let mock = WeatherEntity(location: .init(name: "", region: "", country: "", localtime: ""), currentWeather: .init(tempC: 0, condition: .init(text: "", icon: "", code: 0), windSpeed: 0.0, pressure: 0.0, precipitation: 0.0, humidity: 0, feelsLike: 0.0, uv: 0.0), forecast: [.init(date: "", condition: .init(text: "", icon: "", code: 0), hour: [.init(time: "", tempC: 0.0, condition: .init(text: "", icon: "", code: 0))])])
 }
 
 struct LocationEntity {
@@ -29,7 +29,7 @@ struct LocationEntity {
 }
 
 struct CurrentWeatherEntity {
-    let temp: CGFloat
+    let tempC: CGFloat
     let condition: ConditionEntity
     let windSpeed: Double
     let pressure: CGFloat
@@ -59,6 +59,7 @@ struct ForecastDayEntity {
 
 struct HourEntity {
     let time: String
+    let tempC: CGFloat
     let condition: ConditionEntity
 }
 
@@ -77,7 +78,7 @@ extension LocationEntity {
 
 extension CurrentWeatherEntity {
     init(from data: CurrentDTO) {
-        self.init(temp: data.tempC, condition: ConditionEntity(from: data.condition), windSpeed: data.windKph, pressure: data.pressureMB, precipitation: data.precipIn, humidity: data.humidity, feelsLike: data.feelslikeC, uv: data.uv)
+        self.init(tempC: data.tempC, condition: ConditionEntity(from: data.condition), windSpeed: data.windKph, pressure: data.pressureMB, precipitation: data.precipIn, humidity: data.humidity, feelsLike: data.feelslikeC, uv: data.uv)
     }
 }
 
@@ -95,6 +96,6 @@ extension ForecastDayEntity {
 
 extension HourEntity {
     init(from data: HourDTO) {
-        self.init(time: data.time, condition: ConditionEntity(from: data.condition))
+        self.init(time: data.time, tempC: data.tempC, condition: ConditionEntity(from: data.condition))
     }
 }
