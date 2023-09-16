@@ -10,7 +10,6 @@ import SwiftUI
 
 struct HourlyTempView: View {
     let hour: HourEntity
-    let mainViewModel = MainViewModel()
     
     @State private var animatableValue: CGFloat = 0
 
