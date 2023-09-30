@@ -12,10 +12,7 @@ struct RoundedRectangleView: View {
     let weather: WeatherEntity?
     @Binding var isExpanded: Bool
     
-    @State var colors: [Color] = [.blue, .gray.opacity(0.5), .gray.opacity(0.5)]
-    @State private var selectedDay = 0
-    
-    var handleButton: () -> Void
+    var buttonTapped: () -> Void
     
     var body: some View {
         VStack {
@@ -24,7 +21,7 @@ struct RoundedRectangleView: View {
                     .fontWeight(.bold)
                 Spacer()
                 Button {
-                    handleButton()
+                    buttonTapped()
                 } label: {
                     Image(systemName: "chevron.up.circle.fill")
                         .foregroundColor(.gray.opacity(0.5))
@@ -84,14 +81,14 @@ struct RoundedRectangleView: View {
                             .padding(.horizontal, 8)
                             .background {
                                 Capsule()
-                                    .fill(colors[index])
+                                    .fill(viewModel.colors[index])
                             }.onTapGesture {
                                 withAnimation(.spring()) {
-                                    for colorIndex in 0..<colors.count {
-                                        colors[colorIndex] = .gray.opacity(0.5)
+                                    for colorIndex in 0..<viewModel.colors.count {
+                                        viewModel.colors[colorIndex] = .gray.opacity(0.5)
                                     }
-                                    colors[index] = .blue
-                                    selectedDay = index
+                                    viewModel.colors[index] = .blue
+                                    viewModel.selectedDay = index
                                 }
                             }
                     }

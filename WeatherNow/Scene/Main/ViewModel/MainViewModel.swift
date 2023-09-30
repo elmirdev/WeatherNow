@@ -24,6 +24,7 @@ class MainViewModel: NSObject, ObservableObject {
             fetchUserLocation()
         }
     
+    // MARK: - Helpers
     private func getData(lat: CGFloat, long: CGFloat) {
         NetworkManager.shared.getWeather(lat: lat, long: long) { weather in
             DispatchQueue.main.async {
@@ -81,6 +82,7 @@ class MainViewModel: NSObject, ObservableObject {
     }
 }
 
+// MARK: - CLLocationManagerDelegate
 extension MainViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let userLocation = locations.last else { return }
