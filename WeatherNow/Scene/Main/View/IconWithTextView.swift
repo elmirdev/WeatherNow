@@ -14,6 +14,8 @@ struct SmallIconWithTextCell: View {
     @Binding var isExpanded: Bool
     @Namespace private var animation
     
+    @State private var animatableValue: CGFloat = 0
+    
     var body: some View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 18)
@@ -63,7 +65,7 @@ struct SmallIconWithTextCell: View {
             .padding(.horizontal, 12)
             .onAppear {
                 withAnimation(.easeInOut(duration: 2)) {
-                    self.animatableValue = value
+                    animatableValue = viewModel.value
                 }
             }
         }
